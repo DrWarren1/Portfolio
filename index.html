@@ -79,6 +79,24 @@
       padding: 1rem;
     }
 
+    .hero-title {
+      font-size: clamp(3rem, 13vw, 6.8rem);
+      line-height: 0.9;
+      letter-spacing: -0.06em;
+      max-width: 100%;
+      overflow-wrap: normal;
+    }
+    .hero-title span {
+      display: block;
+      white-space: nowrap;
+    }
+
+    @media (min-width: 1024px) {
+      .hero-title {
+        font-size: clamp(5rem, 7.5vw, 6.8rem);
+      }
+    }
+
     /* Optimisation mobile */
     @media (max-width: 768px) {
       .nav-mobile-scroll {
@@ -111,24 +129,25 @@
   </nav>
 
   <!-- HERO -->
-  <header id="accueil" class="min-h-screen flex items-center px-3 sm:px-6 pt-28 pb-16 overflow-hidden">
+  <header id="accueil" class="min-h-screen flex items-center px-4 sm:px-6 pt-28 pb-16 overflow-hidden">
     <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full justify-items-center lg:justify-items-stretch">
-      <div class="order-2 lg:order-1 text-center lg:text-left w-full max-w-full mx-auto">
+      <div class="order-2 lg:order-1 text-center lg:text-left w-full max-w-[360px] sm:max-w-xl lg:max-w-2xl mx-auto lg:mx-0">
         <p class="uppercase tracking-[0.22em] sm:tracking-[0.32em] text-xs sm:text-sm accent mb-5 sm:mb-6 font-semibold">Industrial Quality Portfolio</p>
-        <h1 class="text-4xl sm:text-6xl lg:text-8xl font-extrabold leading-[0.95] mb-6 sm:mb-8 text-slate-950 break-words">
-          Warren<br>COMUCE
+        <h1 class="hero-title font-extrabold mb-6 sm:mb-8 text-slate-950">
+          <span>Warren</span>
+          <span>COMUCE</span>
         </h1>
-        <p class="text-base sm:text-lg lg:text-xl text-slate-600 leading-relaxed max-w-xl mx-auto lg:mx-0 mb-8">
+        <p class="text-base sm:text-lg lg:text-xl text-slate-600 leading-relaxed w-full max-w-[340px] sm:max-w-xl mx-auto lg:mx-0 mb-8 px-0">
           Étudiant ingénieur en Génie Industriel en alternance, orienté qualité industrielle, conception mécanique, contrôle dimensionnel et amélioration continue.
         </p>
-        <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-3 sm:gap-4">
-          <a href="#projets" class="accent-bg text-white px-7 py-3 rounded-full font-bold shadow-lg shadow-blue-700/20 text-center">Voir mes projets</a>
-          <a href="#contact" class="border border-slate-300 px-7 py-3 rounded-full font-bold hover:bg-slate-100 text-center">Me contacter</a>
+        <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-3 sm:gap-4 w-full max-w-[340px] sm:max-w-none mx-auto lg:mx-0 px-0">
+          <a href="#projets" class="accent-bg text-white px-7 py-3 rounded-full font-bold shadow-lg shadow-blue-700/20 text-center w-full sm:w-auto">Voir mes projets</a>
+          <a href="#contact" class="border border-slate-300 px-7 py-3 rounded-full font-bold hover:bg-slate-100 text-center w-full sm:w-auto">Me contacter</a>
         </div>
       </div>
 
       <div class="order-1 lg:order-2 flex justify-center lg:justify-end w-full">
-        <div class="relative w-full max-w-[280px] sm:max-w-[390px] lg:max-w-[430px] mx-auto">
+        <div class="relative w-full max-w-[300px] sm:max-w-[390px] lg:max-w-[430px] mx-auto">
           <div class="absolute -inset-3 sm:-inset-4 soft-bg rounded-[2rem] -z-10"></div>
           <img src="profil.jpg" alt="Photo de Warren COMUCE" class="w-full h-[360px] sm:h-[430px] object-cover rounded-[1.75rem] shadow-2xl shadow-slate-300" onerror="replaceBrokenImage(this, 'Photo de profil')">
         </div>
