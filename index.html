@@ -10,79 +10,140 @@
 
   <style>
     html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #0f172a; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8fafc;
+      color: #0f172a;
+      overflow-x: hidden;
+    }
     h1, h2, h3 { font-family: 'Syne', sans-serif; }
 
     .accent { color: #1d4ed8; }
     .accent-bg { background: #1d4ed8; }
     .soft-bg { background: #eff6ff; }
 
-    .nav-link { position: relative; color: #475569; transition: 0.25s ease; }
+    .nav-link {
+      position: relative;
+      color: #475569;
+      transition: 0.25s ease;
+      white-space: nowrap;
+    }
     .nav-link:hover { color: #1d4ed8; }
-    .nav-link::after { content: ""; position: absolute; left: 0; bottom: -6px; width: 0; height: 2px; background: #1d4ed8; transition: 0.25s ease; }
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 0;
+      height: 2px;
+      background: #1d4ed8;
+      transition: 0.25s ease;
+    }
     .nav-link:hover::after { width: 100%; }
 
-    .project-card { background: #ffffff; border: 1px solid #e2e8f0; transition: 0.3s ease; cursor: pointer; }
-    .project-card:hover { transform: translateY(-6px); border-color: #1d4ed8; box-shadow: 0 22px 55px rgba(29, 78, 216, 0.12); }
+    .project-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      transition: 0.3s ease;
+      cursor: pointer;
+      height: 100%;
+    }
+    .project-card:hover {
+      transform: translateY(-6px);
+      border-color: #1d4ed8;
+      box-shadow: 0 22px 55px rgba(29, 78, 216, 0.12);
+    }
     .project-card img { transition: 0.35s ease; }
     .project-card:hover img { transform: scale(1.04); }
 
-    .skill-card { background: #ffffff; border: 1px solid #e2e8f0; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04); }
+    .skill-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+      height: 100%;
+    }
     .badge { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
 
     .modal { display: none; }
     .modal.active { display: flex; }
     .modal-box { max-height: 90vh; overflow-y: auto; }
 
-    .image-fallback { background: linear-gradient(135deg, #e0ecff, #f8fafc); display: flex; align-items: center; justify-content: center; color: #1d4ed8; font-weight: 700; text-align: center; padding: 1rem; }
+    .image-fallback {
+      background: linear-gradient(135deg, #e0ecff, #f8fafc);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1d4ed8;
+      font-weight: 700;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    /* Optimisation mobile */
+    @media (max-width: 768px) {
+      .nav-mobile-scroll {
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      .nav-mobile-scroll::-webkit-scrollbar { display: none; }
+      .modal-box {
+        width: calc(100vw - 24px);
+        max-height: 88vh;
+        border-radius: 1.25rem;
+      }
+    }
   </style>
 </head>
 
 <body>
 
   <!-- NAVIGATION -->
-  <nav class="fixed top-0 left-0 w-full z-50 bg-white/85 backdrop-blur-xl border-b border-slate-200">
-    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-      <a href="#accueil" class="font-bold tracking-wide text-slate-950">Warren COMUCE</a>
-      <div class="flex gap-6 md:gap-8 text-sm font-semibold">
+  <nav class="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur-xl border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
+      <a href="#accueil" class="font-bold tracking-wide text-slate-950 text-sm sm:text-base shrink-0">Warren COMUCE</a>
+      <div class="nav-mobile-scroll flex gap-5 sm:gap-8 text-sm font-semibold overflow-x-auto">
         <a href="#projets" class="nav-link">Work</a>
         <a href="#apropos" class="nav-link">About</a>
+        <a href="#competences" class="nav-link">Skills</a>
         <a href="#contact" class="nav-link">Contact</a>
       </div>
     </div>
   </nav>
 
   <!-- HERO -->
-  <header id="accueil" class="min-h-screen flex items-center px-6 pt-28">
-    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center w-full">
-      <div class="order-2 md:order-1">
-        <p class="uppercase tracking-[0.32em] text-sm accent mb-6 font-semibold">Industrial Quality Portfolio</p>
-        <h1 class="text-5xl md:text-8xl font-extrabold leading-[0.95] mb-8 text-slate-950">Warren<br>COMUCE</h1>
-        <p class="text-lg md:text-xl text-slate-600 leading-relaxed max-w-xl mb-8">
+  <header id="accueil" class="min-h-screen flex items-center px-4 sm:px-6 pt-28 pb-16">
+    <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
+      <div class="order-2 lg:order-1 text-center lg:text-left">
+        <p class="uppercase tracking-[0.22em] sm:tracking-[0.32em] text-xs sm:text-sm accent mb-5 sm:mb-6 font-semibold">Industrial Quality Portfolio</p>
+        <h1 class="text-5xl sm:text-6xl lg:text-8xl font-extrabold leading-[0.95] mb-6 sm:mb-8 text-slate-950">
+          Warren<br>COMUCE
+        </h1>
+        <p class="text-base sm:text-lg lg:text-xl text-slate-600 leading-relaxed max-w-xl mx-auto lg:mx-0 mb-8">
           Étudiant ingénieur en Génie Industriel en alternance, orienté qualité industrielle, conception mécanique, contrôle dimensionnel et amélioration continue.
         </p>
-        <div class="flex flex-wrap gap-4">
-          <a href="#projets" class="accent-bg text-white px-7 py-3 rounded-full font-bold shadow-lg shadow-blue-700/20">Voir mes projets</a>
-          <a href="#contact" class="border border-slate-300 px-7 py-3 rounded-full font-bold hover:bg-slate-100">Me contacter</a>
+        <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-3 sm:gap-4">
+          <a href="#projets" class="accent-bg text-white px-7 py-3 rounded-full font-bold shadow-lg shadow-blue-700/20 text-center">Voir mes projets</a>
+          <a href="#contact" class="border border-slate-300 px-7 py-3 rounded-full font-bold hover:bg-slate-100 text-center">Me contacter</a>
         </div>
       </div>
 
-      <div class="order-1 md:order-2 flex justify-center md:justify-end">
-        <div class="relative w-full max-w-[430px]">
-          <div class="absolute -inset-4 soft-bg rounded-[2rem] -z-10"></div>
-          <img src="profil.jpg" alt="Photo de Warren COMUCE" class="w-full h-[430px] object-cover rounded-[1.75rem] shadow-2xl shadow-slate-300" onerror="replaceBrokenImage(this, 'Photo de profil')">
+      <div class="order-1 lg:order-2 flex justify-center lg:justify-end">
+        <div class="relative w-full max-w-[310px] sm:max-w-[390px] lg:max-w-[430px]">
+          <div class="absolute -inset-3 sm:-inset-4 soft-bg rounded-[2rem] -z-10"></div>
+          <img src="profil.jpg" alt="Photo de Warren COMUCE" class="w-full h-[360px] sm:h-[430px] object-cover rounded-[1.75rem] shadow-2xl shadow-slate-300" onerror="replaceBrokenImage(this, 'Photo de profil')">
         </div>
-         </div>
+      </div>
+    </div>
   </header>
 
   <!-- ABOUT -->
-  <section id="apropos" class="px-6 py-24 bg-white border-y border-slate-200">
+  <section id="apropos" class="px-4 sm:px-6 py-20 sm:py-24 bg-white border-y border-slate-200">
     <div class="max-w-6xl mx-auto">
-      <p class="uppercase tracking-[0.32em] text-sm accent mb-5 font-semibold">About</p>
-      <h2 class="text-3xl md:text-5xl font-bold mb-8 text-slate-950">Un profil industriel entre conception, qualité et terrain.</h2>
+      <p class="uppercase tracking-[0.25em] sm:tracking-[0.32em] text-xs sm:text-sm accent mb-5 font-semibold">About</p>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 text-slate-950 leading-tight">Un profil industriel entre conception, qualité et terrain.</h2>
 
-      <div class="grid lg:grid-cols-[1.5fr_1fr] gap-10 items-start">
-        <div class="space-y-6 text-slate-600 text-lg leading-relaxed">
+      <div class="grid lg:grid-cols-[1.5fr_1fr] gap-8 lg:gap-10 items-start">
+        <div class="space-y-6 text-slate-600 text-base sm:text-lg leading-relaxed">
           <p>
             Je suis étudiant en alternance en Génie Industriel à Mécavenir, sur le campus de Mantes-la-Ville, dans un cursus d’ingénieur du CNAM. Cette formation en apprentissage me permet de développer une vision complète de l’industrie : conception, production, qualité, méthodes, gestion de projet et amélioration continue.
           </p>
@@ -97,9 +158,9 @@
           </p>
         </div>
 
-        <aside class="skill-card rounded-[1.75rem] p-7">
+        <aside class="skill-card rounded-[1.75rem] p-6 sm:p-7">
           <h3 class="text-2xl font-bold mb-5 text-slate-950">Profil rapide</h3>
-          <div class="space-y-4 text-slate-600">
+          <div class="space-y-4 text-slate-600 text-sm sm:text-base">
             <p><strong class="text-slate-950">Formation :</strong><br>Diplôme d’Ingénieur Génie Industriel - CNAM / Mécavenir</p>
             <p><strong class="text-slate-950">Expérience actuelle :</strong><br>Alternance Contrôleur Qualité chez GOGRY</p>
             <p><strong class="text-slate-950">Base technique :</strong><br>BUT GMP - IUT de Saint-Denis</p>
@@ -111,45 +172,45 @@
   </section>
 
   <!-- PROJECTS -->
-  <section id="projets" class="px-6 py-24">
+  <section id="projets" class="px-4 sm:px-6 py-20 sm:py-24">
     <div class="max-w-7xl mx-auto">
-      <p class="uppercase tracking-[0.32em] text-sm accent mb-5 font-semibold">Work</p>
-      <h2 class="text-3xl md:text-5xl font-bold mb-12 text-slate-950">Projets sélectionnés</h2>
+      <p class="uppercase tracking-[0.25em] sm:tracking-[0.32em] text-xs sm:text-sm accent mb-5 font-semibold">Work</p>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-10 sm:mb-12 text-slate-950">Projets sélectionnés</h2>
 
-      <div class="grid md:grid-cols-2 gap-8">
-        <article onclick="openModal(0)" class="project-card rounded-[1.75rem] overflow-hidden">
-          <div class="overflow-hidden h-64 bg-slate-100"><img src="pige-detail-5.jpg" alt="Pige de mesure" class="w-full h-full object-cover" onerror="replaceBrokenImage(this, 'Pige de mesure')"></div>
-          <div class="p-7">
-            <p class="accent text-xs uppercase tracking-[0.25em] mb-2 font-bold">Assemblage & métrologie</p>
-            <h3 class="text-2xl font-bold mb-3 text-slate-950">Montage d’une pige de mesure</h3>
-            <p class="text-slate-600">Assemblage, ajustement, calibration et contrôle final d’un instrument de mesure mécanique.</p>
+      <div class="grid sm:grid-cols-2 gap-6 lg:gap-8">
+        <article onclick="openModal(0)" class="project-card rounded-[1.5rem] sm:rounded-[1.75rem] overflow-hidden">
+          <div class="overflow-hidden h-56 sm:h-64 bg-slate-100"><img src="pige-mesure.png" alt="Pige de mesure" class="w-full h-full object-cover" onerror="replaceBrokenImage(this, 'Pige de mesure')"></div>
+          <div class="p-6 sm:p-7">
+            <p class="accent text-xs uppercase tracking-[0.22em] sm:tracking-[0.25em] mb-2 font-bold">Assemblage & métrologie</p>
+            <h3 class="text-xl sm:text-2xl font-bold mb-3 text-slate-950">Montage d’une pige de mesure</h3>
+            <p class="text-slate-600 text-sm sm:text-base">Assemblage, ajustement, calibration et contrôle final d’un instrument de mesure mécanique.</p>
           </div>
         </article>
 
-        <article onclick="openModal(1)" class="project-card rounded-[1.75rem] overflow-hidden">
-          <div class="overflow-hidden h-64 bg-slate-100"><img src="retour-client-avant.jpg" alt="Retour client" class="w-full h-full object-cover" onerror="replaceBrokenImage(this, 'Retour client')"></div>
-          <div class="p-7">
-            <p class="accent text-xs uppercase tracking-[0.25em] mb-2 font-bold">Qualité industrielle</p>
-            <h3 class="text-2xl font-bold mb-3 text-slate-950">Gestion d’un retour client de A à Z</h3>
-            <p class="text-slate-600">Analyse du défaut, réparation, regravure, contrôle final et traçabilité du produit.</p>
+        <article onclick="openModal(1)" class="project-card rounded-[1.5rem] sm:rounded-[1.75rem] overflow-hidden">
+          <div class="overflow-hidden h-56 sm:h-64 bg-slate-100"><img src="retour-client-avant.jpg" alt="Retour client" class="w-full h-full object-cover" onerror="replaceBrokenImage(this, 'Retour client')"></div>
+          <div class="p-6 sm:p-7">
+            <p class="accent text-xs uppercase tracking-[0.22em] sm:tracking-[0.25em] mb-2 font-bold">Qualité industrielle</p>
+            <h3 class="text-xl sm:text-2xl font-bold mb-3 text-slate-950">Gestion d’un retour client de A à Z</h3>
+            <p class="text-slate-600 text-sm sm:text-base">Analyse du défaut, réparation, regravure, contrôle final et traçabilité du produit.</p>
           </div>
         </article>
 
-        <article onclick="openModal(2)" class="project-card rounded-[1.75rem] overflow-hidden">
-          <div class="overflow-hidden h-64 bg-slate-100"><img src="station-meteo-esp.jpg" alt="Station météo ESP8266" class="w-full h-full object-cover" onerror="replaceBrokenImage(this, 'Station météo ESP8266')"></div>
-          <div class="p-7">
-            <p class="accent text-xs uppercase tracking-[0.25em] mb-2 font-bold">Programmation embarquée</p>
-            <h3 class="text-2xl font-bold mb-3 text-slate-950">Station météo avec ESP8266</h3>
-            <p class="text-slate-600">Programme de mesure de température ambiante avec affichage ou transmission des données.</p>
+        <article onclick="openModal(2)" class="project-card rounded-[1.5rem] sm:rounded-[1.75rem] overflow-hidden">
+          <div class="overflow-hidden h-56 sm:h-64 bg-slate-100"><img src="station-meteo-esp.jpg" alt="Station météo ESP8266" class="w-full h-full object-cover" onerror="replaceBrokenImage(this, 'Station météo ESP8266')"></div>
+          <div class="p-6 sm:p-7">
+            <p class="accent text-xs uppercase tracking-[0.22em] sm:tracking-[0.25em] mb-2 font-bold">Programmation embarquée</p>
+            <h3 class="text-xl sm:text-2xl font-bold mb-3 text-slate-950">Station météo avec ESP8266</h3>
+            <p class="text-slate-600 text-sm sm:text-base">Programme de mesure de température ambiante avec affichage ou transmission des données.</p>
           </div>
         </article>
 
-        <article onclick="openModal(3)" class="project-card rounded-[1.75rem] overflow-hidden">
-          <div class="overflow-hidden h-64 bg-slate-100"><img src="presse-1.png" alt="Conception Presse" class="w-full h-full object-cover" onerror="replaceBrokenImage(this, 'Projet à compléter')"></div>
-          <div class="p-7">
-            <p class="accent text-xs uppercase tracking-[0.25em] mb-2 font-bold">Management de la conception</p>
-            <h3 class="text-2xl font-bold mb-3 text-slate-950">Conception d'une presse</h3>
-            <p class="text-slate-600">Élaboration d'un produit : de la demande au prototype</p>
+        <article onclick="openModal(3)" class="project-card rounded-[1.5rem] sm:rounded-[1.75rem] overflow-hidden">
+          <div class="overflow-hidden h-56 sm:h-64 bg-slate-100"><img src="presse-1.png" alt="Presse manuelle" class="w-full h-full object-cover" onerror="replaceBrokenImage(this, 'Presse manuelle')"></div>
+          <div class="p-6 sm:p-7">
+            <p class="accent text-xs uppercase tracking-[0.22em] sm:tracking-[0.25em] mb-2 font-bold">Conception mécanique</p>
+            <h3 class="text-xl sm:text-2xl font-bold mb-3 text-slate-950">Conception d’une presse manuelle</h3>
+            <p class="text-slate-600 text-sm sm:text-base">Analyse fonctionnelle, choix de concept, dimensionnement et étude de faisabilité.</p>
           </div>
         </article>
       </div>
@@ -157,73 +218,73 @@
   </section>
 
   <!-- SIGNATURE / SKILLS -->
-  <section class="px-6 py-28 bg-white border-y border-slate-200">
+  <section id="competences" class="px-4 sm:px-6 py-20 sm:py-28 bg-white border-y border-slate-200">
     <div class="max-w-6xl mx-auto text-center">
-      <p class="uppercase tracking-[0.32em] text-sm accent mb-6 font-semibold">Let’s work together</p>
-      <h2 class="text-4xl md:text-7xl font-extrabold mb-8 text-slate-950">Venez travailler avec moi.</h2>
-      <p class="text-slate-600 text-lg md:text-xl leading-relaxed max-w-3xl mx-auto mb-12">
+      <p class="uppercase tracking-[0.25em] sm:tracking-[0.32em] text-xs sm:text-sm accent mb-6 font-semibold">Let’s work together</p>
+      <h2 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold mb-8 text-slate-950 leading-tight">Venez travailler avec moi.</h2>
+      <p class="text-slate-600 text-base sm:text-lg lg:text-xl leading-relaxed max-w-3xl mx-auto mb-10 sm:mb-12">
         Je combine des compétences en conception mécanique, contrôle qualité, métrologie, analyse de non-conformités et outils numériques pour contribuer à des projets industriels concrets.
       </p>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
-        <div class="skill-card rounded-[1.5rem] p-7">
-          <h3 class="text-xl font-bold mb-4 text-slate-950">Conception mécanique</h3>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 text-left">
+        <div class="skill-card rounded-[1.5rem] p-6 sm:p-7">
+          <h3 class="text-lg sm:text-xl font-bold mb-4 text-slate-950">Conception mécanique</h3>
           <div class="flex flex-wrap gap-2 mb-4"><span class="badge px-3 py-1 rounded-full text-sm">SolidWorks</span><span class="badge px-3 py-1 rounded-full text-sm">Fusion 360</span><span class="badge px-3 py-1 rounded-full text-sm">CATIA</span><span class="badge px-3 py-1 rounded-full text-sm">3DExperience</span></div>
-          <p class="text-slate-600">Conception de pièces et d’ensembles mécaniques, tôlerie, lecture de plans et dossiers techniques.</p>
+          <p class="text-slate-600 text-sm sm:text-base">Conception de pièces et d’ensembles mécaniques, tôlerie, lecture de plans et dossiers techniques.</p>
         </div>
 
-        <div class="skill-card rounded-[1.5rem] p-7">
-          <h3 class="text-xl font-bold mb-4 text-slate-950">Qualité & amélioration continue</h3>
+        <div class="skill-card rounded-[1.5rem] p-6 sm:p-7">
+          <h3 class="text-lg sm:text-xl font-bold mb-4 text-slate-950">Qualité & amélioration continue</h3>
           <div class="flex flex-wrap gap-2 mb-4"><span class="badge px-3 py-1 rounded-full text-sm">Conformité</span><span class="badge px-3 py-1 rounded-full text-sm">Non-conformités</span><span class="badge px-3 py-1 rounded-full text-sm">Actions correctives</span></div>
-          <p class="text-slate-600">Rédaction de fiches de contrôle, rapports de conformité, analyse de dysfonctionnements produits et participation aux actions correctives.</p>
+          <p class="text-slate-600 text-sm sm:text-base">Rédaction de fiches de contrôle, rapports de conformité, analyse de dysfonctionnements produits et participation aux actions correctives.</p>
         </div>
 
-        <div class="skill-card rounded-[1.5rem] p-7">
-          <h3 class="text-xl font-bold mb-4 text-slate-950">Métrologie & contrôle</h3>
+        <div class="skill-card rounded-[1.5rem] p-6 sm:p-7">
+          <h3 class="text-lg sm:text-xl font-bold mb-4 text-slate-950">Métrologie & contrôle</h3>
           <div class="flex flex-wrap gap-2 mb-4"><span class="badge px-3 py-1 rounded-full text-sm">MMT</span><span class="badge px-3 py-1 rounded-full text-sm">MCOSMOS</span><span class="badge px-3 py-1 rounded-full text-sm">Moyens conventionnels</span></div>
-          <p class="text-slate-600">Contrôles dimensionnels et géométriques sur pièces usinées, avec moyens conventionnels et machine tridimensionnelle.</p>
+          <p class="text-slate-600 text-sm sm:text-base">Contrôles dimensionnels et géométriques sur pièces usinées, avec moyens conventionnels et machine tridimensionnelle.</p>
         </div>
 
-        <div class="skill-card rounded-[1.5rem] p-7">
-          <h3 class="text-xl font-bold mb-4 text-slate-950">Informatique & outils</h3>
+        <div class="skill-card rounded-[1.5rem] p-6 sm:p-7">
+          <h3 class="text-lg sm:text-xl font-bold mb-4 text-slate-950">Informatique & outils</h3>
           <div class="flex flex-wrap gap-2 mb-4"><span class="badge px-3 py-1 rounded-full text-sm">Word</span><span class="badge px-3 py-1 rounded-full text-sm">Excel</span><span class="badge px-3 py-1 rounded-full text-sm">PowerPoint</span><span class="badge px-3 py-1 rounded-full text-sm">Teams</span></div>
-          <p class="text-slate-600">Utilisation d’outils bureautiques et collaboratifs pour documenter, suivre et partager les informations techniques.</p>
+          <p class="text-slate-600 text-sm sm:text-base">Utilisation d’outils bureautiques et collaboratifs pour documenter, suivre et partager les informations techniques.</p>
         </div>
 
-        <div class="skill-card rounded-[1.5rem] p-7">
-          <h3 class="text-xl font-bold mb-4 text-slate-950">Programmation & simulation</h3>
+        <div class="skill-card rounded-[1.5rem] p-6 sm:p-7">
+          <h3 class="text-lg sm:text-xl font-bold mb-4 text-slate-950">Programmation & simulation</h3>
           <div class="flex flex-wrap gap-2 mb-4"><span class="badge px-3 py-1 rounded-full text-sm">ESP8266</span><span class="badge px-3 py-1 rounded-full text-sm">Java</span><span class="badge px-3 py-1 rounded-full text-sm">MatLab</span><span class="badge px-3 py-1 rounded-full text-sm">Simulink</span></div>
-          <p class="text-slate-600">Notions en programmation Java, simulation de systèmes avec MatLab/Simulink et projets personnels autour de systèmes embarqués.</p>
+          <p class="text-slate-600 text-sm sm:text-base">Notions en programmation Java, simulation de systèmes avec MatLab/Simulink et projets personnels autour de systèmes embarqués.</p>
         </div>
 
-        <div class="skill-card rounded-[1.5rem] p-7">
-          <h3 class="text-xl font-bold mb-4 text-slate-950">Savoir-être professionnel</h3>
+        <div class="skill-card rounded-[1.5rem] p-6 sm:p-7">
+          <h3 class="text-lg sm:text-xl font-bold mb-4 text-slate-950">Savoir-être professionnel</h3>
           <div class="flex flex-wrap gap-2 mb-4"><span class="badge px-3 py-1 rounded-full text-sm">Rigueur</span><span class="badge px-3 py-1 rounded-full text-sm">Communication</span><span class="badge px-3 py-1 rounded-full text-sm">Adaptation</span></div>
-          <p class="text-slate-600">Communication professionnelle, travail en équipe, esprit d’analyse, organisation, autonomie et ouverture aux retours.</p>
+          <p class="text-slate-600 text-sm sm:text-base">Communication professionnelle, travail en équipe, esprit d’analyse, organisation, autonomie et ouverture aux retours.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" class="px-6 py-24">
-    <div class="max-w-5xl mx-auto rounded-[2rem] p-8 md:p-12 text-center bg-blue-700 text-white shadow-2xl shadow-blue-700/20">
-      <p class="uppercase tracking-[0.32em] text-sm text-blue-100 mb-5 font-semibold">Contact</p>
-      <h2 class="text-3xl md:text-5xl font-bold mb-8">Échanger sur une opportunité</h2>
-      <p class="text-blue-50 mb-8 max-w-2xl mx-auto">Disponible pour discuter d’un projet, d’une alternance ou d’une opportunité dans la qualité, la conception ou l’amélioration industrielle.</p>
-      <div class="flex flex-col md:flex-row gap-4 justify-center">
-        <a href="mailto:warren.comuce@gmail.com" class="bg-white text-blue-700 px-7 py-3 rounded-full font-bold">warren.comuce@gmail.com</a>
-        <a href="https://www.linkedin.com/in/warren-comuce" target="_blank" class="border border-white/40 px-7 py-3 rounded-full font-bold hover:bg-white/10">LinkedIn</a>
+  <section id="contact" class="px-4 sm:px-6 py-20 sm:py-24">
+    <div class="max-w-5xl mx-auto rounded-[1.5rem] sm:rounded-[2rem] p-7 sm:p-12 text-center bg-blue-700 text-white shadow-2xl shadow-blue-700/20">
+      <p class="uppercase tracking-[0.25em] sm:tracking-[0.32em] text-xs sm:text-sm text-blue-100 mb-5 font-semibold">Contact</p>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8">Échanger sur une opportunité</h2>
+      <p class="text-blue-50 mb-8 max-w-2xl mx-auto text-sm sm:text-base">Disponible pour discuter d’un projet, d’une alternance ou d’une opportunité dans la qualité, la conception ou l’amélioration industrielle.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="mailto:warren.comuce@gmail.com" class="bg-white text-blue-700 px-6 sm:px-7 py-3 rounded-full font-bold text-center break-all sm:break-normal">warren.comuce@gmail.com</a>
+        <a href="https://www.linkedin.com/in/warren-comuce" target="_blank" class="border border-white/40 px-6 sm:px-7 py-3 rounded-full font-bold hover:bg-white/10 text-center">LinkedIn</a>
       </div>
     </div>
   </section>
 
-  <footer class="px-6 py-8 text-center text-sm text-slate-500 border-t border-slate-200">© 2026 Warren COMUCE — Portfolio</footer>
+  <footer class="px-4 sm:px-6 py-8 text-center text-sm text-slate-500 border-t border-slate-200">© 2026 Warren COMUCE — Portfolio</footer>
 
   <!-- MODAL -->
-  <div id="modal" class="modal fixed inset-0 z-[100] bg-slate-950/80 items-center justify-center p-4">
-    <div class="modal-box bg-white rounded-[2rem] max-w-5xl w-full p-6 md:p-10 relative shadow-2xl">
-      <button onclick="closeModal()" class="absolute top-5 right-6 text-slate-400 hover:text-slate-950 text-3xl leading-none">×</button>
+  <div id="modal" class="modal fixed inset-0 z-[100] bg-slate-950/80 items-center justify-center p-3 sm:p-4">
+    <div class="modal-box bg-white rounded-[1.25rem] sm:rounded-[2rem] max-w-5xl w-full p-5 sm:p-8 md:p-10 relative shadow-2xl">
+      <button onclick="closeModal()" class="absolute top-4 right-5 text-slate-400 hover:text-slate-950 text-3xl leading-none">×</button>
       <div id="modal-content"></div>
     </div>
   </div>
@@ -242,14 +303,14 @@ const projects = [
     subtitle: "Assemblage mécanique, ajustement et contrôle final",
     text: "Ce projet présente le montage complet d’une pige de mesure. L’objectif est d’obtenir un instrument fiable, fonctionnel et conforme aux exigences de contrôle dimensionnel.",
     actions: ["Assemblage", "Ajustement", "Calibration", "Contrôle final"],
-    images: ["pige-mesure.png", "pige-detail-1.jpg", "pige-detail-2.jpg", "pige-detail-3.jpg"]
+    images: ["pige-detail-1.jpg", "pige-detail-2.jpg", "pige-detail-3.jpg"]
   },
   {
     title: "Gestion d’un retour client de A à Z",
     subtitle: "Analyse, correction et validation",
     text: "Gestion complète d’un retour client avec diagnostic, réparation et validation finale.",
     actions: ["Analyse défaut", "Correction", "Contrôle", "Traçabilité"],
-    images: ["retour-client-avant.jpg", "retour-client-apres.jpg", "controle-retour-client.jpg", "retour-client-detail.jpg"]
+    images: ["retour-client-avant.jpg", "retour-client-apres.jpg", "controle-retour-client.jpg"]
   },
   {
     title: "Station météo avec ESP8266",
@@ -261,15 +322,8 @@ const projects = [
   {
     title: "Conception d’une presse manuelle",
     subtitle: "Projet collaboratif de conception mécanique",
-    text: "Projet collaboratif de conception d’une presse manuelle destinée à l’impression à petite série. Le projet comprend une analyse fonctionnelle complète, la comparaison de concepts, le choix d’une solution à rouleaux avec réglage par vis, ainsi qu’un dimensionnement mécanique (efforts, couple, ergonomie). Le système conçu garantit une pression homogène, une adaptabilité aux matrices et un effort utilisateur maîtrisé.",
-    actions: [
-      "Analyse fonctionnelle du besoin client",
-      "Comparaison de concepts techniques",
-      "Choix d’une solution à rouleaux",
-      "Dimensionnement mécanique (force, couple, effort)",
-      "Conception 3D et réflexion fabrication",
-      "Estimation des coûts et faisabilité"
-    ],
+    text: "Projet collaboratif de conception d’une presse manuelle destinée à l’impression à petite série. Le projet comprend une analyse fonctionnelle complète, la comparaison de concepts, le choix d’une solution à rouleaux avec réglage par vis, ainsi qu’un dimensionnement mécanique.",
+    actions: ["Analyse fonctionnelle", "Comparaison de concepts", "Choix d’une solution à rouleaux", "Dimensionnement mécanique", "Conception 3D", "Estimation des coûts"],
     images: ["presse-1.png", "presse-2.png", "presse-3.png"]
   }
 ];
@@ -278,34 +332,39 @@ function openModal(index){
   const p = projects[index];
   const images = p.images.map(img => `
     <div class="rounded-2xl overflow-hidden bg-slate-100 border border-slate-200">
-      <img src="${img}" alt="${p.title}" class="w-full h-56 object-cover" onerror="replaceBrokenImage(this, 'Image projet')">
+      <img src="${img}" alt="${p.title}" class="w-full h-48 sm:h-56 object-cover" onerror="replaceBrokenImage(this, 'Image projet')">
     </div>
   `).join('');
 
   const actions = p.actions.map(a => `<li class="text-slate-600">• ${a}</li>`).join('');
 
   document.getElementById('modal-content').innerHTML = `
-    <p class="accent uppercase tracking-[0.3em] text-sm mb-4 font-semibold">Projet détaillé</p>
-    <h2 class="text-3xl md:text-5xl font-bold mb-3 text-slate-950 pr-8">${p.title}</h2>
-    <p class="text-slate-500 text-lg mb-8">${p.subtitle}</p>
-    <div class="grid md:grid-cols-3 gap-4 mb-8">${images}</div>
+    <p class="accent uppercase tracking-[0.25em] sm:tracking-[0.3em] text-xs sm:text-sm mb-4 font-semibold">Projet détaillé</p>
+    <h2 class="text-2xl sm:text-4xl md:text-5xl font-bold mb-3 text-slate-950 pr-8 leading-tight">${p.title}</h2>
+    <p class="text-slate-500 text-base sm:text-lg mb-6 sm:mb-8">${p.subtitle}</p>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">${images}</div>
     <div class="grid md:grid-cols-2 gap-8">
       <div>
-        <h3 class="text-2xl font-bold mb-4 text-slate-950">Description</h3>
-        <p class="text-slate-600 leading-relaxed">${p.text}</p>
+        <h3 class="text-xl sm:text-2xl font-bold mb-4 text-slate-950">Description</h3>
+        <p class="text-slate-600 leading-relaxed text-sm sm:text-base">${p.text}</p>
       </div>
       <div>
-        <h3 class="text-2xl font-bold mb-4 text-slate-950">Actions réalisées</h3>
-        <ul class="space-y-2">${actions}</ul>
+        <h3 class="text-xl sm:text-2xl font-bold mb-4 text-slate-950">Actions réalisées</h3>
+        <ul class="space-y-2 text-sm sm:text-base">${actions}</ul>
       </div>
     </div>
   `;
   document.getElementById('modal').classList.add('active');
+  document.body.style.overflow = 'hidden';
 }
 
-function closeModal(){ document.getElementById('modal').classList.remove('active'); }
+function closeModal(){
+  document.getElementById('modal').classList.remove('active');
+  document.body.style.overflow = '';
+}
 
 document.getElementById('modal').addEventListener('click', function(e){ if(e.target === this) closeModal(); });
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
 </script>
 
 </body>
