@@ -17,40 +17,52 @@
     .accent-bg { background: #1d4ed8; }
     .soft-bg { background: #eff6ff; }
 
-    .nav-link { position: relative; color: #475569; transition: 0.25s ease; white-space: nowrap; }
+    .nav-link { position: relative; color: #475569; transition: .25s ease; white-space: nowrap; }
     .nav-link:hover { color: #1d4ed8; }
-    .nav-link::after { content: ""; position: absolute; left: 0; bottom: -6px; width: 0; height: 2px; background: #1d4ed8; transition: 0.25s ease; }
+    .nav-link::after { content: ""; position: absolute; left: 0; bottom: -6px; width: 0; height: 2px; background: #1d4ed8; transition: .25s ease; }
     .nav-link:hover::after { width: 100%; }
 
-    .project-card, .skill-card, .timeline-card { background: #ffffff; border: 1px solid #e2e8f0; }
-    .project-card { transition: 0.3s ease; cursor: pointer; height: 100%; }
-    .project-card:hover { transform: translateY(-6px); border-color: #1d4ed8; box-shadow: 0 22px 55px rgba(29, 78, 216, 0.12); }
-    .project-card img { transition: 0.35s ease; }
+    .project-card, .skill-card, .timeline-card { background: #fff; border: 1px solid #e2e8f0; }
+    .project-card { transition: .3s ease; cursor: pointer; height: 100%; }
+    .project-card:hover { transform: translateY(-6px); border-color: #1d4ed8; box-shadow: 0 22px 55px rgba(29,78,216,.12); }
+    .project-card img { transition: .35s ease; }
     .project-card:hover img { transform: scale(1.04); }
-    .skill-card { box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04); height: 100%; }
+    .skill-card { box-shadow: 0 10px 30px rgba(15,23,42,.04); height: 100%; }
     .badge { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
 
-    .modal { display: none; }
-    .modal.active { display: flex; }
+    .modal, .lightbox { display: none; }
+    .modal.active, .lightbox.active { display: flex; }
     .modal-box { max-height: 90vh; overflow-y: auto; }
 
-    .image-fallback { background: linear-gradient(135deg, #e0ecff, #f8fafc); display: flex; align-items: center; justify-content: center; color: #1d4ed8; font-weight: 700; text-align: center; padding: 1rem; }
+    .project-detail-image { cursor: zoom-in; position: relative; transition: .25s ease; }
+    .project-detail-image:hover { border-color: #60a5fa; box-shadow: 0 12px 28px rgba(29,78,216,.14); }
+    .project-detail-image img { transition: .25s ease; }
+    .project-detail-image:hover img { transform: scale(1.02); }
+    .zoom-label { opacity: 0; transition: .2s ease; }
+    .project-detail-image:hover .zoom-label { opacity: 1; }
 
-    .hero-title { font-size: clamp(2.7rem, 10vw, 5.8rem); line-height: 0.9; letter-spacing: -0.06em; max-width: 100%; }
+    .lightbox { background: rgba(2,6,23,.94); backdrop-filter: blur(8px); }
+    .lightbox-image { max-width: min(94vw, 1500px); max-height: 84vh; object-fit: contain; user-select: none; }
+    .lightbox-nav { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.18); transition: .2s ease; }
+    .lightbox-nav:hover { background: rgba(255,255,255,.22); }
+
+    .image-fallback { background: linear-gradient(135deg,#e0ecff,#f8fafc); display: flex; align-items: center; justify-content: center; color: #1d4ed8; font-weight: 700; text-align: center; padding: 1rem; }
+    .hero-title { font-size: clamp(2.7rem,10vw,5.8rem); line-height: .9; letter-spacing: -.06em; max-width: 100%; }
     .hero-title span { display: block; white-space: nowrap; }
+    .edf-feature { background: linear-gradient(135deg,#eff6ff 0%,#fff 60%,#fff7ed 100%); border: 1px solid #dbeafe; }
 
-    .edf-feature { background: linear-gradient(135deg, #eff6ff 0%, #ffffff 60%, #fff7ed 100%); border: 1px solid #dbeafe; }
-
-    @media (min-width: 1024px) { .hero-title { font-size: clamp(4rem, 5.5vw, 5.5rem); } }
-    @media (max-width: 768px) {
-      .nav-mobile-scroll { overflow-x: auto; scrollbar-width: none; }
-      .nav-mobile-scroll::-webkit-scrollbar { display: none; }
-      .modal-box { width: calc(100vw - 24px); max-height: 88vh; border-radius: 1.25rem; }
+    @media (min-width:1024px) { .hero-title { font-size: clamp(4rem,5.5vw,5.5rem); } }
+    @media (max-width:768px) {
+      .nav-mobile-scroll { overflow-x:auto; scrollbar-width:none; }
+      .nav-mobile-scroll::-webkit-scrollbar { display:none; }
+      .modal-box { width:calc(100vw - 24px); max-height:88vh; border-radius:1.25rem; }
+      .zoom-label { opacity:1; }
+      .lightbox-image { max-width:96vw; max-height:76vh; }
     }
   </style>
 </head>
-
 <body>
+
   <nav class="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur-xl border-b border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
       <a href="#accueil" class="font-bold tracking-wide text-slate-950 text-sm sm:text-base shrink-0">Warren COMUCE</a>
@@ -67,7 +79,7 @@
   <header id="accueil" class="min-h-screen flex items-center px-4 sm:px-6 pt-28 pb-16 overflow-hidden">
     <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full justify-items-center lg:justify-items-stretch">
       <div class="order-2 lg:order-1 text-center lg:text-left w-full max-w-[360px] sm:max-w-xl lg:max-w-2xl mx-auto lg:mx-0">
-        <p class="uppercase tracking-[0.22em] sm:tracking-[0.32em] text-xs sm:text-sm accent mb-5 sm:mb-6 font-semibold">Industrial Engineering Portfolio</p>
+        <p class="uppercase tracking-[.22em] sm:tracking-[.32em] text-xs sm:text-sm accent mb-5 sm:mb-6 font-semibold">Industrial Engineering Portfolio</p>
         <h1 class="hero-title font-extrabold mb-6 sm:mb-8 text-slate-950"><span>Warren</span><span>COMUCE</span></h1>
         <p class="text-base sm:text-lg lg:text-xl text-slate-600 leading-relaxed w-full max-w-[340px] sm:max-w-xl mx-auto lg:mx-0 mb-8">Étudiant ingénieur en Génie Industriel, avec des expériences en qualité, conception mécanique et méthodes de maintenance industrielle.</p>
         <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-3 sm:gap-4 w-full max-w-[340px] sm:max-w-none mx-auto lg:mx-0">
@@ -78,7 +90,7 @@
       <div class="order-1 lg:order-2 flex justify-center lg:justify-end w-full">
         <div class="relative w-full max-w-[300px] sm:max-w-[390px] lg:max-w-[430px] mx-auto">
           <div class="absolute -inset-3 sm:-inset-4 soft-bg rounded-[2rem] -z-10"></div>
-          <img src="profil.jpg" alt="Photo de Warren COMUCE" class="w-full h-[360px] sm:h-[430px] object-cover rounded-[1.75rem] shadow-2xl shadow-slate-300" onerror="replaceBrokenImage(this, 'Photo de profil')">
+          <img src="profil.jpg" alt="Photo de Warren COMUCE" class="w-full h-[360px] sm:h-[430px] object-cover rounded-[1.75rem] shadow-2xl shadow-slate-300" onerror="replaceBrokenImage(this,'Photo de profil')">
         </div>
       </div>
     </div>
@@ -86,7 +98,7 @@
 
   <section id="apropos" class="px-4 sm:px-6 py-20 sm:py-24 bg-white border-y border-slate-200">
     <div class="max-w-6xl mx-auto">
-      <p class="uppercase tracking-[0.25em] sm:tracking-[0.32em] text-xs sm:text-sm accent mb-5 font-semibold">About</p>
+      <p class="uppercase tracking-[.25em] sm:tracking-[.32em] text-xs sm:text-sm accent mb-5 font-semibold">About</p>
       <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 text-slate-950 leading-tight">Un profil industriel entre conception, qualité et méthodes.</h2>
       <div class="grid lg:grid-cols-[1.5fr_1fr] gap-8 lg:gap-10 items-start">
         <div class="space-y-6 text-slate-600 text-base sm:text-lg leading-relaxed">
@@ -112,10 +124,10 @@
 
   <section id="parcours" class="px-4 sm:px-6 py-20 sm:py-24">
     <div class="max-w-6xl mx-auto">
-      <p class="uppercase tracking-[0.25em] sm:tracking-[0.32em] text-xs sm:text-sm accent mb-5 font-semibold">Experience</p>
+      <p class="uppercase tracking-[.25em] sm:tracking-[.32em] text-xs sm:text-sm accent mb-5 font-semibold">Experience</p>
       <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-12 text-slate-950">Expériences professionnelles</h2>
       <div class="space-y-6">
-        <div class="edf-feature rounded-[1.75rem] p-6 sm:p-8 grid lg:grid-cols-[1.15fr_0.85fr] gap-8 items-center">
+        <div class="edf-feature rounded-[1.75rem] p-6 sm:p-8 grid lg:grid-cols-[1.15fr_.85fr] gap-8 items-center">
           <div>
             <p class="accent font-bold">Juil. – Août 2026 • Saint-Barthélemy</p>
             <h3 class="text-2xl sm:text-3xl font-bold text-slate-950 mt-2">EDF SEI — Stage Méthodes & Maintenance Industrielle</h3>
@@ -140,29 +152,24 @@
 
   <section id="projets" class="px-4 sm:px-6 py-20 sm:py-24 bg-white border-y border-slate-200">
     <div class="max-w-7xl mx-auto">
-      <p class="uppercase tracking-[0.25em] sm:tracking-[0.32em] text-xs sm:text-sm accent mb-5 font-semibold">Work</p>
+      <p class="uppercase tracking-[.25em] sm:tracking-[.32em] text-xs sm:text-sm accent mb-5 font-semibold">Work</p>
       <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-slate-950">Projets sélectionnés</h2>
       <p class="text-slate-600 max-w-3xl mb-12">Des réalisations issues de mes expériences en entreprise, de ma formation d’ingénieur et de projets personnels.</p>
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-        <article onclick="openModal(0)" class="project-card rounded-[1.5rem] overflow-hidden"><div class="overflow-hidden h-56 bg-slate-100"><img src="pige-detail-5.jpg" alt="Pige de mesure" class="w-full h-full object-cover" onerror="replaceBrokenImage(this, 'Pige de mesure')"></div><div class="p-6"><p class="accent text-xs uppercase tracking-[0.22em] mb-2 font-bold">Assemblage & métrologie</p><h3 class="text-xl font-bold mb-3 text-slate-950">Montage d’une pige de mesure</h3><p class="text-slate-600 text-sm">Assemblage complet, réglage, calibration et contrôle final d’un instrument de mesure mécanique.</p></div></article>
-
-        <article onclick="openModal(1)" class="project-card rounded-[1.5rem] overflow-hidden"><div class="overflow-hidden h-56 bg-slate-100"><img src="retour-client-avant.jpg" alt="Retour client" class="w-full h-full object-cover" onerror="replaceBrokenImage(this, 'Retour client')"></div><div class="p-6"><p class="accent text-xs uppercase tracking-[0.22em] mb-2 font-bold">Qualité industrielle</p><h3 class="text-xl font-bold mb-3 text-slate-950">Gestion d’un retour client de A à Z</h3><p class="text-slate-600 text-sm">Diagnostic, remise en état, regravure, contrôle final et traçabilité d’un produit retourné.</p></div></article>
-
-        <article onclick="openModal(2)" class="project-card rounded-[1.5rem] overflow-hidden"><div class="overflow-hidden h-56 bg-slate-100"><img src="station-meteo-esp.jpg" alt="Station météo ESP8266" class="w-full h-full object-cover" onerror="replaceBrokenImage(this, 'Station météo ESP8266')"></div><div class="p-6"><p class="accent text-xs uppercase tracking-[0.22em] mb-2 font-bold">Programmation embarquée</p><h3 class="text-xl font-bold mb-3 text-slate-950">Station météo avec ESP8266</h3><p class="text-slate-600 text-sm">Acquisition de température ambiante avec microcontrôleur et interface de visualisation.</p></div></article>
-
-        <article onclick="openModal(3)" class="project-card rounded-[1.5rem] overflow-hidden"><div class="overflow-hidden h-56 bg-slate-100"><img src="presse-1.png" alt="Presse manuelle" class="w-full h-full object-cover" onerror="replaceBrokenImage(this, 'Presse manuelle')"></div><div class="p-6"><p class="accent text-xs uppercase tracking-[0.22em] mb-2 font-bold">Conception mécanique</p><h3 class="text-xl font-bold mb-3 text-slate-950">Conception d’une presse manuelle</h3><p class="text-slate-600 text-sm">Analyse fonctionnelle, choix de concept, dimensionnement et étude de faisabilité.</p></div></article>
-
-        <article onclick="openModal(4)" class="project-card rounded-[1.5rem] overflow-hidden"><div class="overflow-hidden h-56 bg-slate-100"><img src="assets/edf/edf-plm-pdr.svg" alt="PLM et PDR EDF" class="w-full h-full object-cover"></div><div class="p-6"><p class="accent text-xs uppercase tracking-[0.22em] mb-2 font-bold">Méthodes & maintenance</p><h3 class="text-xl font-bold mb-3 text-slate-950">Base maintenance compresseurs — EDF SEI</h3><p class="text-slate-600 text-sm">De la documentation constructeur aux plans de maintenance et listes de pièces de rechange.</p></div></article>
-
-        <article onclick="openModal(5)" class="project-card rounded-[1.5rem] overflow-hidden"><div class="overflow-hidden h-56 bg-slate-100"><img src="assets/edf/edf-planning.svg" alt="Planning triennal EDF" class="w-full h-full object-cover"></div><div class="p-6"><p class="accent text-xs uppercase tracking-[0.22em] mb-2 font-bold">Excel & planification</p><h3 class="text-xl font-bold mb-3 text-slate-950">Outil de suivi et planning triennal</h3><p class="text-slate-600 text-sm">Suivi des heures de marche, cycles, statuts et projection des maintenances sur trois ans.</p></div></article>
+        <article onclick="openModal(0)" class="project-card rounded-[1.5rem] overflow-hidden"><div class="overflow-hidden h-56 bg-slate-100"><img src="pige-detail-5.jpg" alt="Pige de mesure" class="w-full h-full object-cover" onerror="replaceBrokenImage(this,'Pige de mesure')"></div><div class="p-6"><p class="accent text-xs uppercase tracking-[.22em] mb-2 font-bold">Assemblage & métrologie</p><h3 class="text-xl font-bold mb-3 text-slate-950">Montage d’une pige de mesure</h3><p class="text-slate-600 text-sm">Assemblage complet, réglage, calibration et contrôle final d’un instrument de mesure mécanique.</p></div></article>
+        <article onclick="openModal(1)" class="project-card rounded-[1.5rem] overflow-hidden"><div class="overflow-hidden h-56 bg-slate-100"><img src="retour-client-avant.jpg" alt="Retour client" class="w-full h-full object-cover" onerror="replaceBrokenImage(this,'Retour client')"></div><div class="p-6"><p class="accent text-xs uppercase tracking-[.22em] mb-2 font-bold">Qualité industrielle</p><h3 class="text-xl font-bold mb-3 text-slate-950">Gestion d’un retour client de A à Z</h3><p class="text-slate-600 text-sm">Diagnostic, remise en état, regravure, contrôle final et traçabilité d’un produit retourné.</p></div></article>
+        <article onclick="openModal(2)" class="project-card rounded-[1.5rem] overflow-hidden"><div class="overflow-hidden h-56 bg-slate-100"><img src="station-meteo-esp.jpg" alt="Station météo ESP8266" class="w-full h-full object-cover" onerror="replaceBrokenImage(this,'Station météo ESP8266')"></div><div class="p-6"><p class="accent text-xs uppercase tracking-[.22em] mb-2 font-bold">Programmation embarquée</p><h3 class="text-xl font-bold mb-3 text-slate-950">Station météo avec ESP8266</h3><p class="text-slate-600 text-sm">Acquisition de température ambiante avec microcontrôleur et interface de visualisation.</p></div></article>
+        <article onclick="openModal(3)" class="project-card rounded-[1.5rem] overflow-hidden"><div class="overflow-hidden h-56 bg-slate-100"><img src="presse-1.png" alt="Presse manuelle" class="w-full h-full object-cover" onerror="replaceBrokenImage(this,'Presse manuelle')"></div><div class="p-6"><p class="accent text-xs uppercase tracking-[.22em] mb-2 font-bold">Conception mécanique</p><h3 class="text-xl font-bold mb-3 text-slate-950">Conception d’une presse manuelle</h3><p class="text-slate-600 text-sm">Analyse fonctionnelle, choix de concept, dimensionnement et étude de faisabilité.</p></div></article>
+        <article onclick="openModal(4)" class="project-card rounded-[1.5rem] overflow-hidden"><div class="overflow-hidden h-56 bg-slate-100"><img src="assets/edf/edf-plm-pdr.svg" alt="PLM et PDR EDF" class="w-full h-full object-cover"></div><div class="p-6"><p class="accent text-xs uppercase tracking-[.22em] mb-2 font-bold">Méthodes & maintenance</p><h3 class="text-xl font-bold mb-3 text-slate-950">Base maintenance compresseurs — EDF SEI</h3><p class="text-slate-600 text-sm">De la documentation constructeur aux plans de maintenance et listes de pièces de rechange.</p></div></article>
+        <article onclick="openModal(5)" class="project-card rounded-[1.5rem] overflow-hidden"><div class="overflow-hidden h-56 bg-slate-100"><img src="assets/edf/edf-planning.svg" alt="Planning triennal EDF" class="w-full h-full object-cover"></div><div class="p-6"><p class="accent text-xs uppercase tracking-[.22em] mb-2 font-bold">Excel & planification</p><h3 class="text-xl font-bold mb-3 text-slate-950">Outil de suivi et planning triennal</h3><p class="text-slate-600 text-sm">Suivi des heures de marche, cycles, statuts et projection des maintenances sur trois ans.</p></div></article>
       </div>
     </div>
   </section>
 
   <section id="competences" class="px-4 sm:px-6 py-20 sm:py-28">
     <div class="max-w-6xl mx-auto text-center">
-      <p class="uppercase tracking-[0.25em] sm:tracking-[0.32em] text-xs sm:text-sm accent mb-6 font-semibold">Let’s work together</p>
+      <p class="uppercase tracking-[.25em] sm:tracking-[.32em] text-xs sm:text-sm accent mb-6 font-semibold">Let’s work together</p>
       <h2 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold mb-8 text-slate-950 leading-tight">Venez travailler avec moi.</h2>
       <p class="text-slate-600 text-base sm:text-lg lg:text-xl leading-relaxed max-w-3xl mx-auto mb-12">Mon profil combine conception, qualité, métrologie, maintenance industrielle et outils numériques pour comprendre un besoin, structurer une solution et vérifier concrètement le résultat.</p>
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 text-left">
@@ -178,7 +185,7 @@
 
   <section id="contact" class="px-4 sm:px-6 py-20 sm:py-24 bg-white border-t border-slate-200">
     <div class="max-w-5xl mx-auto rounded-[1.5rem] sm:rounded-[2rem] p-7 sm:p-12 text-center bg-blue-700 text-white shadow-2xl shadow-blue-700/20">
-      <p class="uppercase tracking-[0.25em] sm:tracking-[0.32em] text-xs sm:text-sm text-blue-100 mb-5 font-semibold">Contact</p>
+      <p class="uppercase tracking-[.25em] sm:tracking-[.32em] text-xs sm:text-sm text-blue-100 mb-5 font-semibold">Contact</p>
       <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8">Échanger sur une opportunité</h2>
       <p class="text-blue-50 mb-8 max-w-2xl mx-auto text-sm sm:text-base">Pour une alternance, un projet ou une opportunité dans la qualité, la conception, les méthodes ou l’amélioration industrielle.</p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center"><a href="mailto:warren.comuce@gmail.com" class="bg-white text-blue-700 px-6 sm:px-7 py-3 rounded-full font-bold text-center break-all sm:break-normal">warren.comuce@gmail.com</a><a href="https://www.linkedin.com/in/warren-comuce" target="_blank" rel="noopener noreferrer" class="border border-white/40 px-6 sm:px-7 py-3 rounded-full font-bold hover:bg-white/10 text-center">LinkedIn</a></div>
@@ -187,30 +194,141 @@
 
   <footer class="px-4 sm:px-6 py-8 text-center text-sm text-slate-500 border-t border-slate-200">© 2026 Warren COMUCE — Portfolio</footer>
 
-  <div id="modal" class="modal fixed inset-0 z-[100] bg-slate-950/80 items-center justify-center p-3 sm:p-4"><div class="modal-box bg-white rounded-[1.25rem] sm:rounded-[2rem] max-w-5xl w-full p-5 sm:p-8 md:p-10 relative shadow-2xl"><button onclick="closeModal()" class="absolute top-4 right-5 text-slate-400 hover:text-slate-950 text-3xl leading-none" aria-label="Fermer">×</button><div id="modal-content"></div></div></div>
+  <!-- Projet détaillé -->
+  <div id="modal" class="modal fixed inset-0 z-[100] bg-slate-950/80 items-center justify-center p-3 sm:p-4">
+    <div class="modal-box bg-white rounded-[1.25rem] sm:rounded-[2rem] max-w-5xl w-full p-5 sm:p-8 md:p-10 relative shadow-2xl">
+      <button onclick="closeModal()" class="absolute top-4 right-5 text-slate-400 hover:text-slate-950 text-3xl leading-none" aria-label="Fermer le projet">×</button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+  <!-- Visionneur plein écran -->
+  <div id="lightbox" class="lightbox fixed inset-0 z-[200] items-center justify-center p-3 sm:p-6" aria-hidden="true">
+    <button id="lightbox-close" type="button" class="absolute top-4 right-4 sm:top-6 sm:right-7 w-12 h-12 rounded-full text-white text-4xl flex items-center justify-center lightbox-nav z-10" aria-label="Fermer l’image">×</button>
+    <button id="lightbox-prev" type="button" class="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full text-white text-3xl flex items-center justify-center lightbox-nav z-10" aria-label="Image précédente">‹</button>
+    <figure class="flex flex-col items-center justify-center max-w-full">
+      <img id="lightbox-image" class="lightbox-image rounded-xl shadow-2xl" src="" alt="">
+      <figcaption id="lightbox-caption" class="text-white/80 text-sm sm:text-base mt-4 text-center max-w-3xl px-12"></figcaption>
+      <p id="lightbox-counter" class="text-white/50 text-xs mt-2"></p>
+    </figure>
+    <button id="lightbox-next" type="button" class="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full text-white text-3xl flex items-center justify-center lightbox-nav z-10" aria-label="Image suivante">›</button>
+  </div>
 
 <script>
-function replaceBrokenImage(img, label) { const box = document.createElement('div'); box.className = img.className + ' image-fallback'; box.innerHTML = `<span>${label}<br><small>Image à ajouter dans le dépôt GitHub</small></span>`; img.replaceWith(box); }
+function replaceBrokenImage(img,label){
+  const box=document.createElement('div');
+  box.className=img.className+' image-fallback';
+  box.innerHTML=`<span>${label}<br><small>Image à ajouter dans le dépôt GitHub</small></span>`;
+  img.replaceWith(box);
+}
 
-const projects = [
-  { title: "Montage d’une pige de mesure", subtitle: "Assemblage mécanique, ajustement et contrôle final", text: "Réalisation du montage complet d’un instrument de mesure mécanique. Le travail comprend la préparation des composants, le montage, l’alignement des éléments, le réglage, le graissage et la calibration finale.", actions: ["Préparation des composants", "Montage mécanique", "Réglage des jeux et alignements", "Calibration", "Contrôle final de conformité"], images: ["pige-detail-1.jpg", "pige-detail-2.jpg", "pige-detail-3.jpg", "pige-detail-4.jpg", "pige-detail-5.jpg"] },
-  { title: "Gestion d’un retour client de A à Z", subtitle: "Analyse, remise en conformité et validation", text: "Traitement complet d’un retour client concernant un calibre ferroviaire présentant des dégradations et des graduations incorrectes. Le produit a été analysé, remis en état, dégravé puis regravé avant un contrôle complet et la traçabilité associée.", actions: ["Diagnostic du produit retourné", "Remise en état", "Dégravure et regravure laser", "Contrôle dimensionnel complet", "Rapport de contrôle et traçabilité"], images: ["retour-client-avant.jpg", "retour-client-apres.jpg", "controle-retour-client.jpg"] },
-  { title: "Station météo avec ESP8266", subtitle: "Programmation embarquée et acquisition de données", text: "Projet de système embarqué basé sur un ESP8266 permettant d’acquérir la température ambiante à l’aide d’un capteur et de rendre les données accessibles via une interface réseau.", actions: ["Choix du microcontrôleur", "Connexion du capteur", "Programmation de l’acquisition", "Traitement des données", "Interface de visualisation"], images: ["station-meteo-esp.jpg", "esp-montage.jpg", "interface-meteo.jpg", "esp-detail.jpg"] },
-  { title: "Conception d’une presse manuelle", subtitle: "Projet collaboratif de conception mécanique", text: "Conception d’une presse manuelle destinée à l’impression à l’unité ou en petite série. Le projet a couvert l’analyse fonctionnelle du besoin, la comparaison de plusieurs architectures, le choix d’une solution à rouleau avec réglage par vis, le prédimensionnement mécanique et l’étude de la faisabilité économique.", actions: ["Analyse fonctionnelle", "Comparaison de concepts", "Choix d’une architecture", "Dimensionnement mécanique", "Conception 3D", "Nomenclature et estimation des coûts"], images: ["presse-1.png", "presse-2.png", "presse-3.png"] },
-  { title: "Base maintenance compresseurs — EDF SEI", subtitle: "Documentation constructeur → PLM → PDR", text: "Mission menée à la centrale EDF SEI de Saint-Barthélemy afin de fiabiliser la base technique de maintenance du parc de huit compresseurs. Le travail a consisté à reprendre les documentations constructeurs, structurer les opérations par périodicité et constituer les listes de pièces de rechange sans compléter les données non vérifiées.", actions: ["Analyse des documentations constructeurs", "Structuration des plans de maintenance", "Classement des opérations par périodicité", "Constitution des listes PDR", "Repérage des références à confirmer", "Préparation d’une base réutilisable pour la planification"], images: ["assets/edf/edf-mission.svg", "assets/edf/edf-plm-pdr.svg", "assets/edf/edf-gmao.svg", "assets/edf/edf-planning.svg"] },
-  { title: "Outil Excel et planning triennal — EDF SEI", subtitle: "Pilotage par heures de marche et échéances", text: "Développement d’un premier outil Excel de suivi proche d’une mini-GMAO, puis recentrage sur le besoin final : un planning prévisionnel dynamique sur trois ans. L’outil s’appuie sur les heures de marche, les cycles de maintenance, les interventions réalisées et les prochains seuils afin d’anticiper les visites et la préparation des pièces.", actions: ["Suivi des compteurs et paramètres", "Calcul des prochaines échéances", "Gestion des statuts réalisé / retard / à venir", "Historique des interventions", "Projection 2026–2028", "Recalage des cycles avec les heures réelles"], images: ["assets/edf/edf-planning.svg", "assets/edf/edf-gmao.svg", "assets/edf/edf-plm-pdr.svg", "assets/edf/edf-mission.svg"] }
+const projects=[
+  {title:"Montage d’une pige de mesure",subtitle:"Assemblage mécanique, ajustement et contrôle final",text:"Réalisation du montage complet d’un instrument de mesure mécanique. Le travail comprend la préparation des composants, le montage, l’alignement des éléments, le réglage, le graissage et la calibration finale.",actions:["Préparation des composants","Montage mécanique","Réglage des jeux et alignements","Calibration","Contrôle final de conformité"],images:["pige-detail-1.jpg","pige-detail-2.jpg","pige-detail-3.jpg","pige-detail-4.jpg","pige-detail-5.jpg"]},
+  {title:"Gestion d’un retour client de A à Z",subtitle:"Analyse, remise en conformité et validation",text:"Traitement complet d’un retour client concernant un calibre ferroviaire présentant des dégradations et des graduations incorrectes. Le produit a été analysé, remis en état, dégravé puis regravé avant un contrôle complet et la traçabilité associée.",actions:["Diagnostic du produit retourné","Remise en état","Dégravure et regravure laser","Contrôle dimensionnel complet","Rapport de contrôle et traçabilité"],images:["retour-client-avant.jpg","retour-client-apres.jpg","controle-retour-client.jpg"]},
+  {title:"Station météo avec ESP8266",subtitle:"Programmation embarquée et acquisition de données",text:"Projet de système embarqué basé sur un ESP8266 permettant d’acquérir la température ambiante à l’aide d’un capteur et de rendre les données accessibles via une interface réseau.",actions:["Choix du microcontrôleur","Connexion du capteur","Programmation de l’acquisition","Traitement des données","Interface de visualisation"],images:["station-meteo-esp.jpg","esp-montage.jpg","interface-meteo.jpg","esp-detail.jpg"]},
+  {title:"Conception d’une presse manuelle",subtitle:"Projet collaboratif de conception mécanique",text:"Conception d’une presse manuelle destinée à l’impression à l’unité ou en petite série. Le projet a couvert l’analyse fonctionnelle du besoin, la comparaison de plusieurs architectures, le choix d’une solution à rouleau avec réglage par vis, le prédimensionnement mécanique et l’étude de la faisabilité économique.",actions:["Analyse fonctionnelle","Comparaison de concepts","Choix d’une architecture","Dimensionnement mécanique","Conception 3D","Nomenclature et estimation des coûts"],images:["presse-1.png","presse-2.png","presse-3.png"]},
+  {title:"Base maintenance compresseurs — EDF SEI",subtitle:"Documentation constructeur → PLM → PDR",text:"Mission menée à la centrale EDF SEI de Saint-Barthélemy afin de fiabiliser la base technique de maintenance du parc de huit compresseurs. Le travail a consisté à reprendre les documentations constructeurs, structurer les opérations par périodicité et constituer les listes de pièces de rechange sans compléter les données non vérifiées.",actions:["Analyse des documentations constructeurs","Structuration des plans de maintenance","Classement des opérations par périodicité","Constitution des listes PDR","Repérage des références à confirmer","Préparation d’une base réutilisable pour la planification"],images:["assets/edf/edf-mission.svg","assets/edf/edf-plm-pdr.svg","assets/edf/edf-gmao.svg","assets/edf/edf-planning.svg"]},
+  {title:"Outil Excel et planning triennal — EDF SEI",subtitle:"Pilotage par heures de marche et échéances",text:"Développement d’un premier outil Excel de suivi proche d’une mini-GMAO, puis recentrage sur le besoin final : un planning prévisionnel dynamique sur trois ans. L’outil s’appuie sur les heures de marche, les cycles de maintenance, les interventions réalisées et les prochains seuils afin d’anticiper les visites et la préparation des pièces.",actions:["Suivi des compteurs et paramètres","Calcul des prochaines échéances","Gestion des statuts réalisé / retard / à venir","Historique des interventions","Projection 2026–2028","Recalage des cycles avec les heures réelles"],images:["assets/edf/edf-planning.svg","assets/edf/edf-gmao.svg","assets/edf/edf-plm-pdr.svg","assets/edf/edf-mission.svg"]}
 ];
 
+let activeProjectImages=[];
+let activeProjectTitle='';
+let activeImageIndex=0;
+
 function openModal(index){
-  const p = projects[index];
-  const images = p.images.map(img => `<div class="rounded-2xl overflow-hidden bg-slate-100 border border-slate-200"><img src="${img}" alt="${p.title}" class="w-full h-48 sm:h-56 object-cover" onerror="replaceBrokenImage(this, 'Image projet')"></div>`).join('');
-  const actions = p.actions.map(a => `<li class="text-slate-600">• ${a}</li>`).join('');
-  document.getElementById('modal-content').innerHTML = `<p class="accent uppercase tracking-[0.25em] sm:tracking-[0.3em] text-xs sm:text-sm mb-4 font-semibold">Projet détaillé</p><h2 class="text-2xl sm:text-4xl md:text-5xl font-bold mb-3 text-slate-950 pr-8 leading-tight">${p.title}</h2><p class="text-slate-500 text-base sm:text-lg mb-6 sm:mb-8">${p.subtitle}</p><div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">${images}</div><div class="grid md:grid-cols-2 gap-8"><div><h3 class="text-xl sm:text-2xl font-bold mb-4 text-slate-950">Description</h3><p class="text-slate-600 leading-relaxed text-sm sm:text-base">${p.text}</p></div><div><h3 class="text-xl sm:text-2xl font-bold mb-4 text-slate-950">Actions réalisées</h3><ul class="space-y-2 text-sm sm:text-base">${actions}</ul></div></div>`;
-  document.getElementById('modal').classList.add('active'); document.body.style.overflow = 'hidden';
+  const p=projects[index];
+  activeProjectImages=p.images;
+  activeProjectTitle=p.title;
+
+  const images=p.images.map((img,i)=>`
+    <button type="button" class="project-detail-image rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 text-left" data-image-index="${i}" aria-label="Agrandir l’image ${i+1} du projet ${p.title}">
+      <div class="relative h-48 sm:h-56">
+        <img src="${img}" alt="${p.title} — image ${i+1}" class="w-full h-full object-contain bg-white" onerror="replaceBrokenImage(this,'Image projet')">
+        <span class="zoom-label absolute bottom-2 right-2 bg-slate-950/75 text-white text-xs px-3 py-1.5 rounded-full backdrop-blur-sm">Agrandir</span>
+      </div>
+    </button>`).join('');
+
+  const actions=p.actions.map(a=>`<li class="text-slate-600">• ${a}</li>`).join('');
+
+  document.getElementById('modal-content').innerHTML=`
+    <p class="accent uppercase tracking-[.25em] sm:tracking-[.3em] text-xs sm:text-sm mb-4 font-semibold">Projet détaillé</p>
+    <h2 class="text-2xl sm:text-4xl md:text-5xl font-bold mb-3 text-slate-950 pr-8 leading-tight">${p.title}</h2>
+    <p class="text-slate-500 text-base sm:text-lg mb-6 sm:mb-8">${p.subtitle}</p>
+    <p class="text-xs sm:text-sm text-slate-400 mb-3">Cliquez sur une image pour l’afficher en grand.</p>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">${images}</div>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div><h3 class="text-xl sm:text-2xl font-bold mb-4 text-slate-950">Description</h3><p class="text-slate-600 leading-relaxed text-sm sm:text-base">${p.text}</p></div>
+      <div><h3 class="text-xl sm:text-2xl font-bold mb-4 text-slate-950">Actions réalisées</h3><ul class="space-y-2 text-sm sm:text-base">${actions}</ul></div>
+    </div>`;
+
+  document.querySelectorAll('[data-image-index]').forEach(button=>{
+    button.addEventListener('click',e=>{
+      e.stopPropagation();
+      openLightbox(Number(button.dataset.imageIndex));
+    });
+  });
+
+  document.getElementById('modal').classList.add('active');
+  document.body.style.overflow='hidden';
 }
-function closeModal(){ document.getElementById('modal').classList.remove('active'); document.body.style.overflow = ''; }
-document.getElementById('modal').addEventListener('click', function(e){ if(e.target === this) closeModal(); });
-document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
+
+function closeModal(){
+  closeLightbox();
+  document.getElementById('modal').classList.remove('active');
+  document.body.style.overflow='';
+}
+
+function openLightbox(index){
+  if(!activeProjectImages.length) return;
+  activeImageIndex=(index+activeProjectImages.length)%activeProjectImages.length;
+  const src=activeProjectImages[activeImageIndex];
+  const img=document.getElementById('lightbox-image');
+  img.src=src;
+  img.alt=`${activeProjectTitle} — image ${activeImageIndex+1}`;
+  document.getElementById('lightbox-caption').textContent=activeProjectTitle;
+  document.getElementById('lightbox-counter').textContent=`${activeImageIndex+1} / ${activeProjectImages.length}`;
+  const lightbox=document.getElementById('lightbox');
+  lightbox.classList.add('active');
+  lightbox.setAttribute('aria-hidden','false');
+}
+
+function closeLightbox(){
+  const lightbox=document.getElementById('lightbox');
+  lightbox.classList.remove('active');
+  lightbox.setAttribute('aria-hidden','true');
+  document.getElementById('lightbox-image').src='';
+}
+
+function changeLightbox(step){
+  if(!activeProjectImages.length) return;
+  openLightbox(activeImageIndex+step);
+}
+
+document.getElementById('modal').addEventListener('click',function(e){ if(e.target===this) closeModal(); });
+document.getElementById('lightbox').addEventListener('click',function(e){ if(e.target===this) closeLightbox(); });
+document.getElementById('lightbox-close').addEventListener('click',closeLightbox);
+document.getElementById('lightbox-prev').addEventListener('click',()=>changeLightbox(-1));
+document.getElementById('lightbox-next').addEventListener('click',()=>changeLightbox(1));
+
+document.addEventListener('keydown',function(e){
+  const lightbox=document.getElementById('lightbox');
+  if(lightbox.classList.contains('active')){
+    if(e.key==='Escape') closeLightbox();
+    if(e.key==='ArrowLeft') changeLightbox(-1);
+    if(e.key==='ArrowRight') changeLightbox(1);
+    return;
+  }
+  if(e.key==='Escape') closeModal();
+});
+
+let touchStartX=null;
+document.getElementById('lightbox').addEventListener('touchstart',e=>{ touchStartX=e.changedTouches[0].clientX; },{passive:true});
+document.getElementById('lightbox').addEventListener('touchend',e=>{
+  if(touchStartX===null) return;
+  const delta=e.changedTouches[0].clientX-touchStartX;
+  if(Math.abs(delta)>50) changeLightbox(delta>0?-1:1);
+  touchStartX=null;
+},{passive:true});
 </script>
 </body>
 </html>
