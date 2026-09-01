@@ -11,116 +11,46 @@
 
   <style>
     html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #f8fafc;
-      color: #0f172a;
-      overflow-x: hidden;
-    }
+    body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #0f172a; overflow-x: hidden; }
     h1, h2, h3 { font-family: 'Syne', sans-serif; }
-
     .accent { color: #1d4ed8; }
     .accent-bg { background: #1d4ed8; }
     .soft-bg { background: #eff6ff; }
 
-    .nav-link {
-      position: relative;
-      color: #475569;
-      transition: 0.25s ease;
-      white-space: nowrap;
-    }
+    .nav-link { position: relative; color: #475569; transition: 0.25s ease; white-space: nowrap; }
     .nav-link:hover { color: #1d4ed8; }
-    .nav-link::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -6px;
-      width: 0;
-      height: 2px;
-      background: #1d4ed8;
-      transition: 0.25s ease;
-    }
+    .nav-link::after { content: ""; position: absolute; left: 0; bottom: -6px; width: 0; height: 2px; background: #1d4ed8; transition: 0.25s ease; }
     .nav-link:hover::after { width: 100%; }
 
-    .project-card,
-    .skill-card,
-    .timeline-card {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-    }
-
-    .project-card {
-      transition: 0.3s ease;
-      cursor: pointer;
-      height: 100%;
-    }
-    .project-card:hover {
-      transform: translateY(-6px);
-      border-color: #1d4ed8;
-      box-shadow: 0 22px 55px rgba(29, 78, 216, 0.12);
-    }
+    .project-card, .skill-card, .timeline-card { background: #ffffff; border: 1px solid #e2e8f0; }
+    .project-card { transition: 0.3s ease; cursor: pointer; height: 100%; }
+    .project-card:hover { transform: translateY(-6px); border-color: #1d4ed8; box-shadow: 0 22px 55px rgba(29, 78, 216, 0.12); }
     .project-card img { transition: 0.35s ease; }
     .project-card:hover img { transform: scale(1.04); }
-
-    .skill-card {
-      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
-      height: 100%;
-    }
-
-    .badge {
-      background: #eff6ff;
-      color: #1d4ed8;
-      border: 1px solid #bfdbfe;
-    }
+    .skill-card { box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04); height: 100%; }
+    .badge { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
 
     .modal { display: none; }
     .modal.active { display: flex; }
     .modal-box { max-height: 90vh; overflow-y: auto; }
 
-    .image-fallback {
-      background: linear-gradient(135deg, #e0ecff, #f8fafc);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #1d4ed8;
-      font-weight: 700;
-      text-align: center;
-      padding: 1rem;
-    }
+    .image-fallback { background: linear-gradient(135deg, #e0ecff, #f8fafc); display: flex; align-items: center; justify-content: center; color: #1d4ed8; font-weight: 700; text-align: center; padding: 1rem; }
 
-    .hero-title {
-      font-size: clamp(2.7rem, 10vw, 5.8rem);
-      line-height: 0.9;
-      letter-spacing: -0.06em;
-      max-width: 100%;
-    }
-    .hero-title span {
-      display: block;
-      white-space: nowrap;
-    }
+    .hero-title { font-size: clamp(2.7rem, 10vw, 5.8rem); line-height: 0.9; letter-spacing: -0.06em; max-width: 100%; }
+    .hero-title span { display: block; white-space: nowrap; }
 
-    @media (min-width: 1024px) {
-      .hero-title { font-size: clamp(4rem, 5.5vw, 5.5rem); }
-    }
+    .edf-feature { background: linear-gradient(135deg, #eff6ff 0%, #ffffff 60%, #fff7ed 100%); border: 1px solid #dbeafe; }
 
+    @media (min-width: 1024px) { .hero-title { font-size: clamp(4rem, 5.5vw, 5.5rem); } }
     @media (max-width: 768px) {
-      .nav-mobile-scroll {
-        overflow-x: auto;
-        scrollbar-width: none;
-      }
+      .nav-mobile-scroll { overflow-x: auto; scrollbar-width: none; }
       .nav-mobile-scroll::-webkit-scrollbar { display: none; }
-      .modal-box {
-        width: calc(100vw - 24px);
-        max-height: 88vh;
-        border-radius: 1.25rem;
-      }
+      .modal-box { width: calc(100vw - 24px); max-height: 88vh; border-radius: 1.25rem; }
     }
   </style>
 </head>
 
 <body>
-
-  <!-- NAVIGATION -->
   <nav class="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur-xl border-b border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
       <a href="#accueil" class="font-bold tracking-wide text-slate-950 text-sm sm:text-base shrink-0">Warren COMUCE</a>
@@ -134,24 +64,17 @@
     </div>
   </nav>
 
-  <!-- HERO -->
   <header id="accueil" class="min-h-screen flex items-center px-4 sm:px-6 pt-28 pb-16 overflow-hidden">
     <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full justify-items-center lg:justify-items-stretch">
       <div class="order-2 lg:order-1 text-center lg:text-left w-full max-w-[360px] sm:max-w-xl lg:max-w-2xl mx-auto lg:mx-0">
         <p class="uppercase tracking-[0.22em] sm:tracking-[0.32em] text-xs sm:text-sm accent mb-5 sm:mb-6 font-semibold">Industrial Engineering Portfolio</p>
-        <h1 class="hero-title font-extrabold mb-6 sm:mb-8 text-slate-950">
-          <span>Warren</span>
-          <span>COMUCE</span>
-        </h1>
-        <p class="text-base sm:text-lg lg:text-xl text-slate-600 leading-relaxed w-full max-w-[340px] sm:max-w-xl mx-auto lg:mx-0 mb-8">
-          Étudiant ingénieur en Génie Industriel, avec des expériences en qualité, conception mécanique et méthodes de maintenance industrielle.
-        </p>
+        <h1 class="hero-title font-extrabold mb-6 sm:mb-8 text-slate-950"><span>Warren</span><span>COMUCE</span></h1>
+        <p class="text-base sm:text-lg lg:text-xl text-slate-600 leading-relaxed w-full max-w-[340px] sm:max-w-xl mx-auto lg:mx-0 mb-8">Étudiant ingénieur en Génie Industriel, avec des expériences en qualité, conception mécanique et méthodes de maintenance industrielle.</p>
         <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-3 sm:gap-4 w-full max-w-[340px] sm:max-w-none mx-auto lg:mx-0">
           <a href="#projets" class="accent-bg text-white px-7 py-3 rounded-full font-bold shadow-lg shadow-blue-700/20 text-center w-full sm:w-auto">Voir mes projets</a>
           <a href="#contact" class="border border-slate-300 px-7 py-3 rounded-full font-bold hover:bg-slate-100 text-center w-full sm:w-auto">Me contacter</a>
         </div>
       </div>
-
       <div class="order-1 lg:order-2 flex justify-center lg:justify-end w-full">
         <div class="relative w-full max-w-[300px] sm:max-w-[390px] lg:max-w-[430px] mx-auto">
           <div class="absolute -inset-3 sm:-inset-4 soft-bg rounded-[2rem] -z-10"></div>
@@ -161,36 +84,23 @@
     </div>
   </header>
 
-  <!-- ABOUT -->
   <section id="apropos" class="px-4 sm:px-6 py-20 sm:py-24 bg-white border-y border-slate-200">
     <div class="max-w-6xl mx-auto">
       <p class="uppercase tracking-[0.25em] sm:tracking-[0.32em] text-xs sm:text-sm accent mb-5 font-semibold">About</p>
       <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 text-slate-950 leading-tight">Un profil industriel entre conception, qualité et méthodes.</h2>
-
       <div class="grid lg:grid-cols-[1.5fr_1fr] gap-8 lg:gap-10 items-start">
         <div class="space-y-6 text-slate-600 text-base sm:text-lg leading-relaxed">
-          <p>
-            Je suis étudiant en Génie Industriel dans un cursus d’ingénieur CNAM / Mécavenir. Ma formation me permet de développer une approche transverse de l’industrie, en travaillant sur la conception mécanique, la qualité, les méthodes, la production, la maintenance et l’amélioration continue.
-          </p>
-          <p>
-            Mon parcours a commencé par un BUT Génie Mécanique et Productique à l’IUT de Saint-Denis - Sorbonne Paris Nord. J’y ai développé des bases solides en mécanique, conception, fabrication, métrologie et lecture de plans. Lors de mon stage chez ACMC, j’ai travaillé en conception mécanique sur SolidWorks, avec la modélisation de pièces, la réalisation de plans et la prise en compte des contraintes de fabrication en atelier.
-          </p>
-          <p>
-            J’ai ensuite évolué pendant mon alternance chez GOGRY dans un environnement de mécanique de précision, avec des missions de contrôle qualité, métrologie et gestion de non-conformités. J’y ai notamment utilisé une MMT et MCOSMOS, réalisé des contrôles dimensionnels et participé à la remise en conformité de produits destinés à des clients industriels.
-          </p>
-          <p>
-            En 2026, j’ai rejoint EDF SEI à la centrale de Saint-Barthélemy pour un stage orienté méthodes et maintenance industrielle. Cette expérience élargit mon profil vers la structuration de plans de maintenance, l’analyse de documentation constructeur, le suivi des équipements et la création d’outils Excel de planification et de suivi des échéances.
-          </p>
-          <p>
-            Mon objectif professionnel est d’évoluer vers un poste d’ingénieur qualité ou d’ingénieur conception, tout en conservant une forte compréhension du terrain industriel et des enjeux de fiabilité des équipements.
-          </p>
+          <p>Je suis étudiant en Génie Industriel dans un cursus d’ingénieur CNAM / Mécavenir. Ma formation me permet de développer une approche transverse de l’industrie, en travaillant sur la conception mécanique, la qualité, les méthodes, la production, la maintenance et l’amélioration continue.</p>
+          <p>Mon parcours a commencé par un BUT Génie Mécanique et Productique à l’IUT de Saint-Denis - Sorbonne Paris Nord. J’y ai développé des bases solides en mécanique, conception, fabrication, métrologie et lecture de plans. Lors de mon stage chez ACMC, j’ai travaillé en conception mécanique sur SolidWorks, avec la modélisation de pièces, la réalisation de plans et la prise en compte des contraintes de fabrication en atelier.</p>
+          <p>J’ai ensuite évolué pendant mon alternance chez GOGRY dans un environnement de mécanique de précision, avec des missions de contrôle qualité, métrologie et gestion de non-conformités. J’y ai notamment utilisé une MMT et MCOSMOS, réalisé des contrôles dimensionnels et participé à la remise en conformité de produits destinés à des clients industriels.</p>
+          <p>En 2026, j’ai rejoint EDF SEI à la centrale de Saint-Barthélemy pour un stage orienté méthodes et maintenance industrielle. J’y ai travaillé sur la fiabilisation de la base technique des compresseurs, les plans de maintenance, les pièces de rechange, le suivi des heures de marche et la construction d’un planning prévisionnel dynamique sur trois ans.</p>
+          <p>Mon objectif professionnel est d’évoluer vers un poste d’ingénieur qualité ou d’ingénieur conception, tout en conservant une forte compréhension du terrain industriel et des enjeux de fiabilité des équipements.</p>
         </div>
-
         <aside class="skill-card rounded-[1.75rem] p-6 sm:p-7">
           <h3 class="text-2xl font-bold mb-5 text-slate-950">Profil rapide</h3>
           <div class="space-y-4 text-slate-600 text-sm sm:text-base">
             <p><strong class="text-slate-950">Formation :</strong><br>Diplôme d’Ingénieur Génie Industriel - CNAM / Mécavenir</p>
-            <p><strong class="text-slate-950">Expérience actuelle :</strong><br>Stage Ingénieur Méthodes & Maintenance Industrielle - EDF SEI</p>
+            <p><strong class="text-slate-950">Expérience récente :</strong><br>Stage Méthodes & Maintenance Industrielle - EDF SEI</p>
             <p><strong class="text-slate-950">Expérience qualité :</strong><br>Contrôleur Qualité - GOGRY</p>
             <p><strong class="text-slate-950">Base technique :</strong><br>BUT GMP - IUT de Saint-Denis</p>
             <p><strong class="text-slate-950">Objectifs :</strong><br>Ingénieur qualité / ingénieur conception</p>
@@ -200,50 +110,34 @@
     </div>
   </section>
 
-  <!-- EXPERIENCE -->
   <section id="parcours" class="px-4 sm:px-6 py-20 sm:py-24">
     <div class="max-w-6xl mx-auto">
       <p class="uppercase tracking-[0.25em] sm:tracking-[0.32em] text-xs sm:text-sm accent mb-5 font-semibold">Experience</p>
       <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-12 text-slate-950">Expériences professionnelles</h2>
-
       <div class="space-y-6">
-        <div class="timeline-card rounded-[1.5rem] p-6 sm:p-8 grid md:grid-cols-[220px_1fr] gap-4 md:gap-8">
+        <div class="edf-feature rounded-[1.75rem] p-6 sm:p-8 grid lg:grid-cols-[1.15fr_0.85fr] gap-8 items-center">
           <div>
-            <p class="accent font-bold">Juil. – Août 2026</p>
-            <p class="text-slate-500 text-sm mt-1">Saint-Barthélemy</p>
+            <p class="accent font-bold">Juil. – Août 2026 • Saint-Barthélemy</p>
+            <h3 class="text-2xl sm:text-3xl font-bold text-slate-950 mt-2">EDF SEI — Stage Méthodes & Maintenance Industrielle</h3>
+            <p class="text-slate-600 mt-4 leading-relaxed">Mission centrée sur les huit compresseurs de la centrale : analyse des documentations constructeurs, création des plans de maintenance et listes PDR, suivi des heures de marche et développement d’un planning prévisionnel triennal pour anticiper les visites et les besoins pièces.</p>
+            <div class="flex flex-wrap gap-2 mt-5"><span class="badge px-3 py-1 rounded-full text-sm">8 compresseurs</span><span class="badge px-3 py-1 rounded-full text-sm">PLM / PDR</span><span class="badge px-3 py-1 rounded-full text-sm">Excel</span><span class="badge px-3 py-1 rounded-full text-sm">Planning 3 ans</span></div>
           </div>
-          <div>
-            <h3 class="text-2xl font-bold text-slate-950">EDF SEI — Stagiaire Ingénieur Méthodes & Maintenance Industrielle</h3>
-            <p class="text-slate-600 mt-3 leading-relaxed">Structuration de plans de maintenance pour les compresseurs de la centrale, analyse des périodicités constructeur, identification des pièces de rechange et développement d’un outil Excel de suivi des échéances en fonction des heures de fonctionnement.</p>
-          </div>
+          <img src="assets/edf/edf-mission.svg" alt="Synthèse mission EDF SEI" class="w-full rounded-2xl shadow-lg border border-blue-100">
         </div>
 
         <div class="timeline-card rounded-[1.5rem] p-6 sm:p-8 grid md:grid-cols-[220px_1fr] gap-4 md:gap-8">
-          <div>
-            <p class="accent font-bold">2024 – 2026</p>
-            <p class="text-slate-500 text-sm mt-1">Mécanique de précision</p>
-          </div>
-          <div>
-            <h3 class="text-2xl font-bold text-slate-950">GOGRY — Contrôleur Qualité en alternance</h3>
-            <p class="text-slate-600 mt-3 leading-relaxed">Contrôles dimensionnels et géométriques, utilisation de MMT et MCOSMOS, rédaction de documents qualité, contrôle de pièces ferroviaires, assemblage et calibration d’instruments de mesure et traitement de non-conformités clients.</p>
-          </div>
+          <div><p class="accent font-bold">2024 – 2026</p><p class="text-slate-500 text-sm mt-1">Mécanique de précision</p></div>
+          <div><h3 class="text-2xl font-bold text-slate-950">GOGRY — Contrôleur Qualité en alternance</h3><p class="text-slate-600 mt-3 leading-relaxed">Contrôles dimensionnels et géométriques, utilisation de MMT et MCOSMOS, rédaction de documents qualité, contrôle de pièces ferroviaires, assemblage et calibration d’instruments de mesure et traitement de non-conformités clients.</p></div>
         </div>
 
         <div class="timeline-card rounded-[1.5rem] p-6 sm:p-8 grid md:grid-cols-[220px_1fr] gap-4 md:gap-8">
-          <div>
-            <p class="accent font-bold">Mars – Mai 2023</p>
-            <p class="text-slate-500 text-sm mt-1">Conception mécanique</p>
-          </div>
-          <div>
-            <h3 class="text-2xl font-bold text-slate-950">ACMC — Stage Concepteur mécanique</h3>
-            <p class="text-slate-600 mt-3 leading-relaxed">Modélisation 3D sous SolidWorks, réalisation de plans techniques et de dossiers de fabrication, analyse fonctionnelle des pièces et adaptation des conceptions aux procédés de fabrication.</p>
-          </div>
+          <div><p class="accent font-bold">Mars – Mai 2023</p><p class="text-slate-500 text-sm mt-1">Conception mécanique</p></div>
+          <div><h3 class="text-2xl font-bold text-slate-950">ACMC — Stage Concepteur mécanique</h3><p class="text-slate-600 mt-3 leading-relaxed">Modélisation 3D sous SolidWorks, réalisation de plans techniques et de dossiers de fabrication, analyse fonctionnelle des pièces et adaptation des conceptions aux procédés de fabrication.</p></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PROJECTS -->
   <section id="projets" class="px-4 sm:px-6 py-20 sm:py-24 bg-white border-y border-slate-200">
     <div class="max-w-7xl mx-auto">
       <p class="uppercase tracking-[0.25em] sm:tracking-[0.32em] text-xs sm:text-sm accent mb-5 font-semibold">Work</p>
@@ -251,226 +145,72 @@
       <p class="text-slate-600 max-w-3xl mb-12">Des réalisations issues de mes expériences en entreprise, de ma formation d’ingénieur et de projets personnels.</p>
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-        <article onclick="openModal(0)" class="project-card rounded-[1.5rem] overflow-hidden">
-          <div class="overflow-hidden h-56 bg-slate-100"><img src="pige-detail-5.jpg" alt="Pige de mesure" class="w-full h-full object-cover" onerror="replaceBrokenImage(this, 'Pige de mesure')"></div>
-          <div class="p-6">
-            <p class="accent text-xs uppercase tracking-[0.22em] mb-2 font-bold">Assemblage & métrologie</p>
-            <h3 class="text-xl font-bold mb-3 text-slate-950">Montage d’une pige de mesure</h3>
-            <p class="text-slate-600 text-sm">Assemblage complet, réglage, calibration et contrôle final d’un instrument de mesure mécanique.</p>
-          </div>
-        </article>
+        <article onclick="openModal(0)" class="project-card rounded-[1.5rem] overflow-hidden"><div class="overflow-hidden h-56 bg-slate-100"><img src="pige-detail-5.jpg" alt="Pige de mesure" class="w-full h-full object-cover" onerror="replaceBrokenImage(this, 'Pige de mesure')"></div><div class="p-6"><p class="accent text-xs uppercase tracking-[0.22em] mb-2 font-bold">Assemblage & métrologie</p><h3 class="text-xl font-bold mb-3 text-slate-950">Montage d’une pige de mesure</h3><p class="text-slate-600 text-sm">Assemblage complet, réglage, calibration et contrôle final d’un instrument de mesure mécanique.</p></div></article>
 
-        <article onclick="openModal(1)" class="project-card rounded-[1.5rem] overflow-hidden">
-          <div class="overflow-hidden h-56 bg-slate-100"><img src="retour-client-avant.jpg" alt="Retour client" class="w-full h-full object-cover" onerror="replaceBrokenImage(this, 'Retour client')"></div>
-          <div class="p-6">
-            <p class="accent text-xs uppercase tracking-[0.22em] mb-2 font-bold">Qualité industrielle</p>
-            <h3 class="text-xl font-bold mb-3 text-slate-950">Gestion d’un retour client de A à Z</h3>
-            <p class="text-slate-600 text-sm">Diagnostic, remise en état, regravure, contrôle final et traçabilité d’un produit retourné.</p>
-          </div>
-        </article>
+        <article onclick="openModal(1)" class="project-card rounded-[1.5rem] overflow-hidden"><div class="overflow-hidden h-56 bg-slate-100"><img src="retour-client-avant.jpg" alt="Retour client" class="w-full h-full object-cover" onerror="replaceBrokenImage(this, 'Retour client')"></div><div class="p-6"><p class="accent text-xs uppercase tracking-[0.22em] mb-2 font-bold">Qualité industrielle</p><h3 class="text-xl font-bold mb-3 text-slate-950">Gestion d’un retour client de A à Z</h3><p class="text-slate-600 text-sm">Diagnostic, remise en état, regravure, contrôle final et traçabilité d’un produit retourné.</p></div></article>
 
-        <article onclick="openModal(2)" class="project-card rounded-[1.5rem] overflow-hidden">
-          <div class="overflow-hidden h-56 bg-slate-100"><img src="station-meteo-esp.jpg" alt="Station météo ESP8266" class="w-full h-full object-cover" onerror="replaceBrokenImage(this, 'Station météo ESP8266')"></div>
-          <div class="p-6">
-            <p class="accent text-xs uppercase tracking-[0.22em] mb-2 font-bold">Programmation embarquée</p>
-            <h3 class="text-xl font-bold mb-3 text-slate-950">Station météo avec ESP8266</h3>
-            <p class="text-slate-600 text-sm">Acquisition de température ambiante avec microcontrôleur et interface de visualisation.</p>
-          </div>
-        </article>
+        <article onclick="openModal(2)" class="project-card rounded-[1.5rem] overflow-hidden"><div class="overflow-hidden h-56 bg-slate-100"><img src="station-meteo-esp.jpg" alt="Station météo ESP8266" class="w-full h-full object-cover" onerror="replaceBrokenImage(this, 'Station météo ESP8266')"></div><div class="p-6"><p class="accent text-xs uppercase tracking-[0.22em] mb-2 font-bold">Programmation embarquée</p><h3 class="text-xl font-bold mb-3 text-slate-950">Station météo avec ESP8266</h3><p class="text-slate-600 text-sm">Acquisition de température ambiante avec microcontrôleur et interface de visualisation.</p></div></article>
 
-        <article onclick="openModal(3)" class="project-card rounded-[1.5rem] overflow-hidden">
-          <div class="overflow-hidden h-56 bg-slate-100"><img src="presse-1.png" alt="Presse manuelle" class="w-full h-full object-cover" onerror="replaceBrokenImage(this, 'Presse manuelle')"></div>
-          <div class="p-6">
-            <p class="accent text-xs uppercase tracking-[0.22em] mb-2 font-bold">Conception mécanique</p>
-            <h3 class="text-xl font-bold mb-3 text-slate-950">Conception d’une presse manuelle</h3>
-            <p class="text-slate-600 text-sm">Analyse fonctionnelle, comparaison de concepts, dimensionnement et étude de faisabilité.</p>
-          </div>
-        </article>
+        <article onclick="openModal(3)" class="project-card rounded-[1.5rem] overflow-hidden"><div class="overflow-hidden h-56 bg-slate-100"><img src="presse-1.png" alt="Presse manuelle" class="w-full h-full object-cover" onerror="replaceBrokenImage(this, 'Presse manuelle')"></div><div class="p-6"><p class="accent text-xs uppercase tracking-[0.22em] mb-2 font-bold">Conception mécanique</p><h3 class="text-xl font-bold mb-3 text-slate-950">Conception d’une presse manuelle</h3><p class="text-slate-600 text-sm">Analyse fonctionnelle, choix de concept, dimensionnement et étude de faisabilité.</p></div></article>
 
-        <article onclick="openModal(4)" class="project-card rounded-[1.5rem] overflow-hidden">
-          <div class="overflow-hidden h-56 bg-slate-100"><img src="edf-maintenance.jpg" alt="Maintenance compresseurs EDF" class="w-full h-full object-cover" onerror="replaceBrokenImage(this, 'Maintenance compresseurs EDF')"></div>
-          <div class="p-6">
-            <p class="accent text-xs uppercase tracking-[0.22em] mb-2 font-bold">Méthodes & maintenance</p>
-            <h3 class="text-xl font-bold mb-3 text-slate-950">Plans de maintenance compresseurs — EDF SEI</h3>
-            <p class="text-slate-600 text-sm">Analyse documentaire et structuration des opérations de maintenance pour plusieurs technologies de compresseurs.</p>
-          </div>
-        </article>
+        <article onclick="openModal(4)" class="project-card rounded-[1.5rem] overflow-hidden"><div class="overflow-hidden h-56 bg-slate-100"><img src="assets/edf/edf-plm-pdr.svg" alt="PLM et PDR EDF" class="w-full h-full object-cover"></div><div class="p-6"><p class="accent text-xs uppercase tracking-[0.22em] mb-2 font-bold">Méthodes & maintenance</p><h3 class="text-xl font-bold mb-3 text-slate-950">Base maintenance compresseurs — EDF SEI</h3><p class="text-slate-600 text-sm">De la documentation constructeur aux plans de maintenance et listes de pièces de rechange.</p></div></article>
 
-        <article onclick="openModal(5)" class="project-card rounded-[1.5rem] overflow-hidden">
-          <div class="overflow-hidden h-56 bg-slate-100"><img src="edf-excel.jpg" alt="Outil Excel maintenance EDF" class="w-full h-full object-cover" onerror="replaceBrokenImage(this, 'Outil Excel de maintenance')"></div>
-          <div class="p-6">
-            <p class="accent text-xs uppercase tracking-[0.22em] mb-2 font-bold">Excel & maintenance</p>
-            <h3 class="text-xl font-bold mb-3 text-slate-950">Outil de suivi des échéances de maintenance</h3>
-            <p class="text-slate-600 text-sm">Tableau de bord basé sur les heures de fonctionnement, les cycles de maintenance et les échéances des équipements.</p>
-          </div>
-        </article>
+        <article onclick="openModal(5)" class="project-card rounded-[1.5rem] overflow-hidden"><div class="overflow-hidden h-56 bg-slate-100"><img src="assets/edf/edf-planning.svg" alt="Planning triennal EDF" class="w-full h-full object-cover"></div><div class="p-6"><p class="accent text-xs uppercase tracking-[0.22em] mb-2 font-bold">Excel & planification</p><h3 class="text-xl font-bold mb-3 text-slate-950">Outil de suivi et planning triennal</h3><p class="text-slate-600 text-sm">Suivi des heures de marche, cycles, statuts et projection des maintenances sur trois ans.</p></div></article>
       </div>
     </div>
   </section>
 
-  <!-- SIGNATURE / SKILLS -->
   <section id="competences" class="px-4 sm:px-6 py-20 sm:py-28">
     <div class="max-w-6xl mx-auto text-center">
       <p class="uppercase tracking-[0.25em] sm:tracking-[0.32em] text-xs sm:text-sm accent mb-6 font-semibold">Let’s work together</p>
       <h2 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold mb-8 text-slate-950 leading-tight">Venez travailler avec moi.</h2>
-      <p class="text-slate-600 text-base sm:text-lg lg:text-xl leading-relaxed max-w-3xl mx-auto mb-12">
-        Mon profil combine conception, qualité, métrologie, maintenance industrielle et outils numériques pour comprendre un besoin, structurer une solution et vérifier concrètement le résultat.
-      </p>
-
+      <p class="text-slate-600 text-base sm:text-lg lg:text-xl leading-relaxed max-w-3xl mx-auto mb-12">Mon profil combine conception, qualité, métrologie, maintenance industrielle et outils numériques pour comprendre un besoin, structurer une solution et vérifier concrètement le résultat.</p>
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 text-left">
-        <div class="skill-card rounded-[1.5rem] p-6 sm:p-7">
-          <h3 class="text-lg sm:text-xl font-bold mb-4 text-slate-950">Conception mécanique</h3>
-          <div class="flex flex-wrap gap-2 mb-4"><span class="badge px-3 py-1 rounded-full text-sm">SolidWorks</span><span class="badge px-3 py-1 rounded-full text-sm">Fusion 360</span><span class="badge px-3 py-1 rounded-full text-sm">CATIA</span><span class="badge px-3 py-1 rounded-full text-sm">3DExperience</span></div>
-          <p class="text-slate-600 text-sm sm:text-base">Conception de pièces et d’ensembles mécaniques, tôlerie, lecture de plans, analyse fonctionnelle et dossiers techniques.</p>
-        </div>
-
-        <div class="skill-card rounded-[1.5rem] p-6 sm:p-7">
-          <h3 class="text-lg sm:text-xl font-bold mb-4 text-slate-950">Qualité & conformité</h3>
-          <div class="flex flex-wrap gap-2 mb-4"><span class="badge px-3 py-1 rounded-full text-sm">Conformité</span><span class="badge px-3 py-1 rounded-full text-sm">Non-conformités</span><span class="badge px-3 py-1 rounded-full text-sm">Actions correctives</span></div>
-          <p class="text-slate-600 text-sm sm:text-base">Contrôle qualité, rédaction de documents de conformité, traçabilité, analyse de défauts et résolution de problèmes.</p>
-        </div>
-
-        <div class="skill-card rounded-[1.5rem] p-6 sm:p-7">
-          <h3 class="text-lg sm:text-xl font-bold mb-4 text-slate-950">Métrologie & contrôle</h3>
-          <div class="flex flex-wrap gap-2 mb-4"><span class="badge px-3 py-1 rounded-full text-sm">MMT</span><span class="badge px-3 py-1 rounded-full text-sm">MCOSMOS</span><span class="badge px-3 py-1 rounded-full text-sm">Moyens conventionnels</span></div>
-          <p class="text-slate-600 text-sm sm:text-base">Contrôles dimensionnels et géométriques, utilisation de moyens conventionnels, colonne de mesure et machine tridimensionnelle.</p>
-        </div>
-
-        <div class="skill-card rounded-[1.5rem] p-6 sm:p-7">
-          <h3 class="text-lg sm:text-xl font-bold mb-4 text-slate-950">Maintenance & méthodes</h3>
-          <div class="flex flex-wrap gap-2 mb-4"><span class="badge px-3 py-1 rounded-full text-sm">Plans de maintenance</span><span class="badge px-3 py-1 rounded-full text-sm">Périodicités</span><span class="badge px-3 py-1 rounded-full text-sm">PDR</span></div>
-          <p class="text-slate-600 text-sm sm:text-base">Analyse de documentation constructeur, structuration d’opérations préventives et suivi des cycles de maintenance d’équipements industriels.</p>
-        </div>
-
-        <div class="skill-card rounded-[1.5rem] p-6 sm:p-7">
-          <h3 class="text-lg sm:text-xl font-bold mb-4 text-slate-950">Numérique & simulation</h3>
-          <div class="flex flex-wrap gap-2 mb-4"><span class="badge px-3 py-1 rounded-full text-sm">Excel</span><span class="badge px-3 py-1 rounded-full text-sm">ESP8266</span><span class="badge px-3 py-1 rounded-full text-sm">MatLab</span><span class="badge px-3 py-1 rounded-full text-sm">Simulink</span></div>
-          <p class="text-slate-600 text-sm sm:text-base">Tableaux de bord Excel, suivi de données, programmation embarquée et notions de simulation de systèmes.</p>
-        </div>
-
-        <div class="skill-card rounded-[1.5rem] p-6 sm:p-7">
-          <h3 class="text-lg sm:text-xl font-bold mb-4 text-slate-950">Savoir-être professionnel</h3>
-          <div class="flex flex-wrap gap-2 mb-4"><span class="badge px-3 py-1 rounded-full text-sm">Rigueur</span><span class="badge px-3 py-1 rounded-full text-sm">Analyse</span><span class="badge px-3 py-1 rounded-full text-sm">Adaptation</span></div>
-          <p class="text-slate-600 text-sm sm:text-base">Communication professionnelle, travail en équipe, autonomie, organisation, sens des responsabilités et adaptation au terrain.</p>
-        </div>
+        <div class="skill-card rounded-[1.5rem] p-6 sm:p-7"><h3 class="text-lg sm:text-xl font-bold mb-4 text-slate-950">Conception mécanique</h3><div class="flex flex-wrap gap-2 mb-4"><span class="badge px-3 py-1 rounded-full text-sm">SolidWorks</span><span class="badge px-3 py-1 rounded-full text-sm">Fusion 360</span><span class="badge px-3 py-1 rounded-full text-sm">CATIA</span><span class="badge px-3 py-1 rounded-full text-sm">3DExperience</span></div><p class="text-slate-600 text-sm sm:text-base">Conception de pièces et d’ensembles mécaniques, tôlerie, lecture de plans, analyse fonctionnelle et dossiers techniques.</p></div>
+        <div class="skill-card rounded-[1.5rem] p-6 sm:p-7"><h3 class="text-lg sm:text-xl font-bold mb-4 text-slate-950">Qualité & conformité</h3><div class="flex flex-wrap gap-2 mb-4"><span class="badge px-3 py-1 rounded-full text-sm">Conformité</span><span class="badge px-3 py-1 rounded-full text-sm">Non-conformités</span><span class="badge px-3 py-1 rounded-full text-sm">Actions correctives</span></div><p class="text-slate-600 text-sm sm:text-base">Contrôle qualité, rédaction de documents de conformité, traçabilité, analyse de défauts et résolution de problèmes.</p></div>
+        <div class="skill-card rounded-[1.5rem] p-6 sm:p-7"><h3 class="text-lg sm:text-xl font-bold mb-4 text-slate-950">Métrologie & contrôle</h3><div class="flex flex-wrap gap-2 mb-4"><span class="badge px-3 py-1 rounded-full text-sm">MMT</span><span class="badge px-3 py-1 rounded-full text-sm">MCOSMOS</span><span class="badge px-3 py-1 rounded-full text-sm">Moyens conventionnels</span></div><p class="text-slate-600 text-sm sm:text-base">Contrôles dimensionnels et géométriques, utilisation de moyens conventionnels et machine tridimensionnelle.</p></div>
+        <div class="skill-card rounded-[1.5rem] p-6 sm:p-7"><h3 class="text-lg sm:text-xl font-bold mb-4 text-slate-950">Maintenance & méthodes</h3><div class="flex flex-wrap gap-2 mb-4"><span class="badge px-3 py-1 rounded-full text-sm">PLM</span><span class="badge px-3 py-1 rounded-full text-sm">PDR</span><span class="badge px-3 py-1 rounded-full text-sm">Périodicités</span></div><p class="text-slate-600 text-sm sm:text-base">Analyse de documentation constructeur, structuration d’opérations préventives et suivi des cycles de maintenance.</p></div>
+        <div class="skill-card rounded-[1.5rem] p-6 sm:p-7"><h3 class="text-lg sm:text-xl font-bold mb-4 text-slate-950">Numérique & simulation</h3><div class="flex flex-wrap gap-2 mb-4"><span class="badge px-3 py-1 rounded-full text-sm">Excel</span><span class="badge px-3 py-1 rounded-full text-sm">ESP8266</span><span class="badge px-3 py-1 rounded-full text-sm">MatLab</span><span class="badge px-3 py-1 rounded-full text-sm">Simulink</span></div><p class="text-slate-600 text-sm sm:text-base">Tableaux de bord Excel, suivi de données, programmation embarquée et notions de simulation de systèmes.</p></div>
+        <div class="skill-card rounded-[1.5rem] p-6 sm:p-7"><h3 class="text-lg sm:text-xl font-bold mb-4 text-slate-950">Savoir-être professionnel</h3><div class="flex flex-wrap gap-2 mb-4"><span class="badge px-3 py-1 rounded-full text-sm">Rigueur</span><span class="badge px-3 py-1 rounded-full text-sm">Analyse</span><span class="badge px-3 py-1 rounded-full text-sm">Adaptation</span></div><p class="text-slate-600 text-sm sm:text-base">Communication professionnelle, travail en équipe, autonomie, organisation et adaptation au terrain.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section id="contact" class="px-4 sm:px-6 py-20 sm:py-24 bg-white border-t border-slate-200">
     <div class="max-w-5xl mx-auto rounded-[1.5rem] sm:rounded-[2rem] p-7 sm:p-12 text-center bg-blue-700 text-white shadow-2xl shadow-blue-700/20">
       <p class="uppercase tracking-[0.25em] sm:tracking-[0.32em] text-xs sm:text-sm text-blue-100 mb-5 font-semibold">Contact</p>
       <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8">Échanger sur une opportunité</h2>
       <p class="text-blue-50 mb-8 max-w-2xl mx-auto text-sm sm:text-base">Pour une alternance, un projet ou une opportunité dans la qualité, la conception, les méthodes ou l’amélioration industrielle.</p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="mailto:warren.comuce@gmail.com" class="bg-white text-blue-700 px-6 sm:px-7 py-3 rounded-full font-bold text-center break-all sm:break-normal">warren.comuce@gmail.com</a>
-        <a href="https://www.linkedin.com/in/warren-comuce" target="_blank" rel="noopener noreferrer" class="border border-white/40 px-6 sm:px-7 py-3 rounded-full font-bold hover:bg-white/10 text-center">LinkedIn</a>
-      </div>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center"><a href="mailto:warren.comuce@gmail.com" class="bg-white text-blue-700 px-6 sm:px-7 py-3 rounded-full font-bold text-center break-all sm:break-normal">warren.comuce@gmail.com</a><a href="https://www.linkedin.com/in/warren-comuce" target="_blank" rel="noopener noreferrer" class="border border-white/40 px-6 sm:px-7 py-3 rounded-full font-bold hover:bg-white/10 text-center">LinkedIn</a></div>
     </div>
   </section>
 
   <footer class="px-4 sm:px-6 py-8 text-center text-sm text-slate-500 border-t border-slate-200">© 2026 Warren COMUCE — Portfolio</footer>
 
-  <!-- MODAL -->
-  <div id="modal" class="modal fixed inset-0 z-[100] bg-slate-950/80 items-center justify-center p-3 sm:p-4">
-    <div class="modal-box bg-white rounded-[1.25rem] sm:rounded-[2rem] max-w-5xl w-full p-5 sm:p-8 md:p-10 relative shadow-2xl">
-      <button onclick="closeModal()" class="absolute top-4 right-5 text-slate-400 hover:text-slate-950 text-3xl leading-none" aria-label="Fermer">×</button>
-      <div id="modal-content"></div>
-    </div>
-  </div>
+  <div id="modal" class="modal fixed inset-0 z-[100] bg-slate-950/80 items-center justify-center p-3 sm:p-4"><div class="modal-box bg-white rounded-[1.25rem] sm:rounded-[2rem] max-w-5xl w-full p-5 sm:p-8 md:p-10 relative shadow-2xl"><button onclick="closeModal()" class="absolute top-4 right-5 text-slate-400 hover:text-slate-950 text-3xl leading-none" aria-label="Fermer">×</button><div id="modal-content"></div></div></div>
 
 <script>
-function replaceBrokenImage(img, label) {
-  const box = document.createElement('div');
-  box.className = img.className + ' image-fallback';
-  box.innerHTML = `<span>${label}<br><small>Image à ajouter dans le dépôt GitHub</small></span>`;
-  img.replaceWith(box);
-}
+function replaceBrokenImage(img, label) { const box = document.createElement('div'); box.className = img.className + ' image-fallback'; box.innerHTML = `<span>${label}<br><small>Image à ajouter dans le dépôt GitHub</small></span>`; img.replaceWith(box); }
 
 const projects = [
-  {
-    title: "Montage d’une pige de mesure",
-    subtitle: "Assemblage mécanique, ajustement et contrôle final",
-    text: "Réalisation du montage complet d’un instrument de mesure mécanique. Le travail comprend la préparation et le nettoyage des composants, le montage à vide, l’alignement des éléments, le réglage des jeux, le graissage, l’intégration de la poignée et du compteur puis la calibration finale.",
-    actions: ["Préparation des composants", "Montage mécanique", "Réglage des jeux et alignements", "Calibration", "Contrôle final de conformité"],
-    images: ["pige-detail-1.jpg", "pige-detail-2.jpg", "pige-detail-3.jpg", "pige-detail-4.jpg", "pige-detail-5.jpg"]
-  },
-  {
-    title: "Gestion d’un retour client de A à Z",
-    subtitle: "Analyse, remise en conformité et validation",
-    text: "Traitement complet d’un retour client concernant un calibre ferroviaire présentant des dégradations et des graduations incorrectes. Le produit a été analysé, remis en état, dégravé puis regravé avant un contrôle complet et la rédaction de la traçabilité associée.",
-    actions: ["Diagnostic du produit retourné", "Remise en état", "Dégravure et regravure laser", "Contrôle dimensionnel complet", "Rapport de contrôle et traçabilité"],
-    images: ["retour-client-avant.jpg", "retour-client-apres.jpg", "controle-retour-client.jpg", "retour-client-detail.jpg"]
-  },
-  {
-    title: "Station météo avec ESP8266",
-    subtitle: "Programmation embarquée et acquisition de données",
-    text: "Projet de système embarqué basé sur un ESP8266 permettant d’acquérir la température ambiante à l’aide d’un capteur et de rendre les données accessibles via une interface réseau.",
-    actions: ["Choix du microcontrôleur", "Connexion du capteur", "Programmation de l’acquisition", "Traitement des données", "Interface de visualisation"],
-    images: ["station-meteo-esp.jpg", "esp-montage.jpg", "interface-meteo.jpg", "esp-detail.jpg"]
-  },
-  {
-    title: "Conception d’une presse manuelle",
-    subtitle: "Projet collaboratif de conception mécanique",
-    text: "Conception d’une presse manuelle destinée à l’impression à l’unité ou en petite série. Le projet a couvert l’analyse fonctionnelle du besoin, la comparaison de plusieurs architectures, le choix d’une solution à rouleau avec réglage par vis, le prédimensionnement mécanique et l’étude de la faisabilité économique.",
-    actions: ["Analyse fonctionnelle", "Comparaison de concepts", "Choix d’une architecture", "Dimensionnement mécanique", "Conception 3D", "Nomenclature et estimation des coûts"],
-    images: ["presse-1.png", "presse-2.png", "presse-3.png", "presse-4.png"]
-  },
-  {
-    title: "Plans de maintenance compresseurs — EDF SEI",
-    subtitle: "Méthodes de maintenance industrielle",
-    text: "Mission menée à la centrale EDF SEI de Saint-Barthélemy afin de structurer la maintenance de plusieurs compresseurs du site. Le travail s’appuie sur les manuels constructeurs, les configurations réelles des équipements, les périodicités d’entretien et les références de pièces de rechange.",
-    actions: ["Inventaire et identification des équipements", "Analyse des documentations constructeurs", "Définition des opérations par périodicité", "Structuration des plans de maintenance", "Association des pièces de rechange et consommables", "Vérification de cohérence documentation / configuration réelle"],
-    images: ["edf-maintenance.jpg", "edf-compair.jpg", "edf-gardner.jpg", "edf-delta.jpg"]
-  },
-  {
-    title: "Outil Excel de suivi des échéances de maintenance",
-    subtitle: "Planification basée sur les heures de fonctionnement",
-    text: "Développement d’un outil Excel destiné au suivi des échéances de maintenance des compresseurs. Le système exploite les heures de fonctionnement et les cycles de maintenance pour identifier les opérations à venir, les retards et les prochaines échéances après réinitialisation des cycles à la suite d’une intervention.",
-    actions: ["Structuration des paramètres de suivi", "Gestion des cycles horaires", "Calcul des prochaines échéances", "Statuts à venir / retard", "Suivi des paliers de maintenance", "Tableau de bord pour la planification des interventions"],
-    images: ["edf-excel.jpg", "edf-excel-dashboard.jpg", "edf-excel-cycles.jpg", "edf-excel-planning.jpg"]
-  }
+  { title: "Montage d’une pige de mesure", subtitle: "Assemblage mécanique, ajustement et contrôle final", text: "Réalisation du montage complet d’un instrument de mesure mécanique. Le travail comprend la préparation des composants, le montage, l’alignement des éléments, le réglage, le graissage et la calibration finale.", actions: ["Préparation des composants", "Montage mécanique", "Réglage des jeux et alignements", "Calibration", "Contrôle final de conformité"], images: ["pige-detail-1.jpg", "pige-detail-2.jpg", "pige-detail-3.jpg", "pige-detail-4.jpg", "pige-detail-5.jpg"] },
+  { title: "Gestion d’un retour client de A à Z", subtitle: "Analyse, remise en conformité et validation", text: "Traitement complet d’un retour client concernant un calibre ferroviaire présentant des dégradations et des graduations incorrectes. Le produit a été analysé, remis en état, dégravé puis regravé avant un contrôle complet et la traçabilité associée.", actions: ["Diagnostic du produit retourné", "Remise en état", "Dégravure et regravure laser", "Contrôle dimensionnel complet", "Rapport de contrôle et traçabilité"], images: ["retour-client-avant.jpg", "retour-client-apres.jpg", "controle-retour-client.jpg"] },
+  { title: "Station météo avec ESP8266", subtitle: "Programmation embarquée et acquisition de données", text: "Projet de système embarqué basé sur un ESP8266 permettant d’acquérir la température ambiante à l’aide d’un capteur et de rendre les données accessibles via une interface réseau.", actions: ["Choix du microcontrôleur", "Connexion du capteur", "Programmation de l’acquisition", "Traitement des données", "Interface de visualisation"], images: ["station-meteo-esp.jpg", "esp-montage.jpg", "interface-meteo.jpg", "esp-detail.jpg"] },
+  { title: "Conception d’une presse manuelle", subtitle: "Projet collaboratif de conception mécanique", text: "Conception d’une presse manuelle destinée à l’impression à l’unité ou en petite série. Le projet a couvert l’analyse fonctionnelle du besoin, la comparaison de plusieurs architectures, le choix d’une solution à rouleau avec réglage par vis, le prédimensionnement mécanique et l’étude de la faisabilité économique.", actions: ["Analyse fonctionnelle", "Comparaison de concepts", "Choix d’une architecture", "Dimensionnement mécanique", "Conception 3D", "Nomenclature et estimation des coûts"], images: ["presse-1.png", "presse-2.png", "presse-3.png"] },
+  { title: "Base maintenance compresseurs — EDF SEI", subtitle: "Documentation constructeur → PLM → PDR", text: "Mission menée à la centrale EDF SEI de Saint-Barthélemy afin de fiabiliser la base technique de maintenance du parc de huit compresseurs. Le travail a consisté à reprendre les documentations constructeurs, structurer les opérations par périodicité et constituer les listes de pièces de rechange sans compléter les données non vérifiées.", actions: ["Analyse des documentations constructeurs", "Structuration des plans de maintenance", "Classement des opérations par périodicité", "Constitution des listes PDR", "Repérage des références à confirmer", "Préparation d’une base réutilisable pour la planification"], images: ["assets/edf/edf-mission.svg", "assets/edf/edf-plm-pdr.svg", "assets/edf/edf-gmao.svg", "assets/edf/edf-planning.svg"] },
+  { title: "Outil Excel et planning triennal — EDF SEI", subtitle: "Pilotage par heures de marche et échéances", text: "Développement d’un premier outil Excel de suivi proche d’une mini-GMAO, puis recentrage sur le besoin final : un planning prévisionnel dynamique sur trois ans. L’outil s’appuie sur les heures de marche, les cycles de maintenance, les interventions réalisées et les prochains seuils afin d’anticiper les visites et la préparation des pièces.", actions: ["Suivi des compteurs et paramètres", "Calcul des prochaines échéances", "Gestion des statuts réalisé / retard / à venir", "Historique des interventions", "Projection 2026–2028", "Recalage des cycles avec les heures réelles"], images: ["assets/edf/edf-planning.svg", "assets/edf/edf-gmao.svg", "assets/edf/edf-plm-pdr.svg", "assets/edf/edf-mission.svg"] }
 ];
 
 function openModal(index){
   const p = projects[index];
-  const images = p.images.map(img => `
-    <div class="rounded-2xl overflow-hidden bg-slate-100 border border-slate-200">
-      <img src="${img}" alt="${p.title}" class="w-full h-48 sm:h-56 object-cover" onerror="replaceBrokenImage(this, 'Image projet')">
-    </div>
-  `).join('');
-
+  const images = p.images.map(img => `<div class="rounded-2xl overflow-hidden bg-slate-100 border border-slate-200"><img src="${img}" alt="${p.title}" class="w-full h-48 sm:h-56 object-cover" onerror="replaceBrokenImage(this, 'Image projet')"></div>`).join('');
   const actions = p.actions.map(a => `<li class="text-slate-600">• ${a}</li>`).join('');
-
-  document.getElementById('modal-content').innerHTML = `
-    <p class="accent uppercase tracking-[0.25em] sm:tracking-[0.3em] text-xs sm:text-sm mb-4 font-semibold">Projet détaillé</p>
-    <h2 class="text-2xl sm:text-4xl md:text-5xl font-bold mb-3 text-slate-950 pr-8 leading-tight">${p.title}</h2>
-    <p class="text-slate-500 text-base sm:text-lg mb-6 sm:mb-8">${p.subtitle}</p>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">${images}</div>
-    <div class="grid md:grid-cols-2 gap-8">
-      <div>
-        <h3 class="text-xl sm:text-2xl font-bold mb-4 text-slate-950">Description</h3>
-        <p class="text-slate-600 leading-relaxed text-sm sm:text-base">${p.text}</p>
-      </div>
-      <div>
-        <h3 class="text-xl sm:text-2xl font-bold mb-4 text-slate-950">Actions réalisées</h3>
-        <ul class="space-y-2 text-sm sm:text-base">${actions}</ul>
-      </div>
-    </div>
-  `;
-  document.getElementById('modal').classList.add('active');
-  document.body.style.overflow = 'hidden';
+  document.getElementById('modal-content').innerHTML = `<p class="accent uppercase tracking-[0.25em] sm:tracking-[0.3em] text-xs sm:text-sm mb-4 font-semibold">Projet détaillé</p><h2 class="text-2xl sm:text-4xl md:text-5xl font-bold mb-3 text-slate-950 pr-8 leading-tight">${p.title}</h2><p class="text-slate-500 text-base sm:text-lg mb-6 sm:mb-8">${p.subtitle}</p><div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">${images}</div><div class="grid md:grid-cols-2 gap-8"><div><h3 class="text-xl sm:text-2xl font-bold mb-4 text-slate-950">Description</h3><p class="text-slate-600 leading-relaxed text-sm sm:text-base">${p.text}</p></div><div><h3 class="text-xl sm:text-2xl font-bold mb-4 text-slate-950">Actions réalisées</h3><ul class="space-y-2 text-sm sm:text-base">${actions}</ul></div></div>`;
+  document.getElementById('modal').classList.add('active'); document.body.style.overflow = 'hidden';
 }
-
-function closeModal(){
-  document.getElementById('modal').classList.remove('active');
-  document.body.style.overflow = '';
-}
-
+function closeModal(){ document.getElementById('modal').classList.remove('active'); document.body.style.overflow = ''; }
 document.getElementById('modal').addEventListener('click', function(e){ if(e.target === this) closeModal(); });
 document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
 </script>
-
 </body>
 </html>
