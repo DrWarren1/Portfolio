@@ -15,6 +15,9 @@ L’aperçu local de la session utilise http://127.0.0.1:8765. Cette adresse fon
 - Mise en page élargie sur grand écran pour mieux occuper l’espace disponible.
 - Sur mobile, bouton menu en haut à droite et navigation horizontale dépliable avec des icônes agrandies.
 - Cadre du portrait réaligné sur les petits écrans.
+- Typographie agrandie dans les projets, le parcours, le profil, les compétences et les fenêtres détaillées.
+- Zoom plein écran accessible en cliquant sur une image dans une fiche projet.
+- Sculpture 3D d’accueil agrandie et davantage mise en valeur.
 - Pause des animations et respect du réglage système de réduction des mouvements. Aperçu statique si WebGL est indisponible.
 - Douze projets, filtres par domaine, fiches avec galeries et indications de provenance.
 - Logos du CNAM, de Mécavenir, de l’IUT de Saint-Denis / Sorbonne Paris Nord et de BOUMA.
