@@ -13,6 +13,8 @@ L’aperçu local de la session utilise http://127.0.0.1:8765. Cette adresse fon
 - Tracé doré à la souris, navigation flottante placée en haut, animations d’apparition.
 - Sélecteur FR / EN dans la navigation. Tous les contenus, les projets, les fiches détaillées et les libellés d’interface sont traduits.
 - Mise en page élargie sur grand écran pour mieux occuper l’espace disponible.
+- Sur mobile, bouton menu en haut à droite et navigation horizontale dépliable avec des icônes agrandies.
+- Cadre du portrait réaligné sur les petits écrans.
 - Pause des animations et respect du réglage système de réduction des mouvements. Aperçu statique si WebGL est indisponible.
 - Douze projets, filtres par domaine, fiches avec galeries et indications de provenance.
 - Logos du CNAM, de Mécavenir, de l’IUT de Saint-Denis / Sorbonne Paris Nord et de BOUMA.
@@ -41,7 +43,9 @@ Le CV retrouvé n’a pas été ajouté au téléchargement car il indique encor
 
 ## Publication
 
-Le dossier est prêt pour un hébergement statique sur GitHub Pages.
+Le site est publié sur GitHub Pages : https://drwarren1.github.io/Portfolio/
+
+Le dossier `assets` du dépôt contient les photographies, les logos, les polices et la bibliothèque Three.js nécessaires. Le site publié ne dépend pas des fichiers personnels présents sur l’ordinateur.
 
 ## Vérifications effectuées
 
